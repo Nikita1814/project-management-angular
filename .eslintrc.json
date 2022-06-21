@@ -1,11 +1,17 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json"],
+        "project": [
+          "tsconfig.json"
+        ],
         "createDefaultProgram": true
       },
       "extends": [
@@ -32,15 +38,37 @@
         ],
         "prettier/prettier": "off",
         "curly": "error",
-        "operator-linebreak": ["error", "after"],
-        "semi-style": ["error", "last"],
+        "operator-linebreak": [
+          "error",
+          "after"
+        ],
+        "semi-style": [
+          "error",
+          "last"
+        ],
         "semi-spacing": "error",
-        "comma-style": ["error", "last"],
-        "max-len": ["error", { "code": 120 }],
-        "keyword-spacing": ["error", { "before": true }],
+        "comma-style": [
+          "error",
+          "last"
+        ],
+        "max-len": [
+          "error",
+          {
+            "code": 120
+          }
+        ],
+        "keyword-spacing": [
+          "error",
+          {
+            "before": true
+          }
+        ],
         "space-infix-ops": "error",
         "space-unary-ops": "error",
-        "space-in-parens": ["error", "never"],
+        "space-in-parens": [
+          "error",
+          "never"
+        ],
         "no-new-wrappers": "error",
         "no-new-object": "error",
         "no-new-func": "error",
@@ -51,11 +79,23 @@
         "prefer-const": "error",
         "no-throw-literal": "error",
         "default-case": "error",
-        "eqeqeq": ["error", "smart"],
-        "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+        "eqeqeq": [
+          "error",
+          "smart"
+        ],
+        "func-style": [
+          "error",
+          "declaration",
+          {
+            "allowArrowFunctions": true
+          }
+        ],
         "prefer-arrow-callback": "error",
         "array-callback-return": "error",
-        "indent": ["error", 2],
+        "indent": [
+          "error",
+          2
+        ],
         "no-unneeded-ternary": "error",
         "no-restricted-syntax": [
           "error",
@@ -77,7 +117,10 @@
         "no-new": "error",
         "no-self-compare": "error",
         "no-useless-call": "error",
-        "semi": ["error", "always"],
+        "semi": [
+          "error",
+          "always"
+        ],
         "brace-style": "error",
         "no-redeclare": "error",
         "no-extra-semi": "error",
@@ -92,8 +135,14 @@
         "no-empty-function": "error",
         "no-duplicate-imports": "error",
         "func-call-spacing": "error",
-        "comma-dangle": ["error", "always-multiline"],
-        "quotes": ["error", "single"],
+        "comma-dangle": [
+          "error",
+          "always-multiline"
+        ],
+        "quotes": [
+          "error",
+          "single"
+        ],
         "key-spacing": "error",
         "comma-spacing": "error",
         "no-shadow": "error",
@@ -110,8 +159,14 @@
             "next": "import"
           }
         ],
-        "array-bracket-spacing": ["error", "never"],
-        "object-curly-spacing": ["error", "always"],
+        "array-bracket-spacing": [
+          "error",
+          "never"
+        ],
+        "object-curly-spacing": [
+          "error",
+          "always"
+        ],
         "@angular-eslint/component-max-inline-declarations": "error",
         "@angular-eslint/contextual-decorator": "error",
         "@angular-eslint/no-attribute-decorator": "error",
@@ -124,7 +179,12 @@
         "@angular-eslint/use-component-view-encapsulation": "error",
         "rxjs/no-compat": "error",
         "rxjs/no-ignored-observable": "error",
-        "rxjs/no-exposed-subjects": ["error", { "allowProtected": true }],
+        "rxjs/no-exposed-subjects": [
+          "error",
+          {
+            "allowProtected": true
+          }
+        ],
         "rxjs/no-topromise": "error",
         "rxjs/no-cyclic-action": "error",
         "rxjs/no-unsafe-catch": "error",
@@ -133,9 +193,21 @@
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/recommended"
+      ]
     }
   ]
 }
