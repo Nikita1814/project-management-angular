@@ -1,1 +1,13 @@
-<p>header works!</p>
+<div class="header">
+  <div class="language-switch">
+    EN
+    <!--<nb-toggle [(ngModel)]="langRu"  [(checked)]="checked">Toggle with NgModel</nb-toggle>-->
+    RU
+  </div>
+    <button class="header-new-board" nbButton status="primary" size="small">Create a board</button>
+    <button clas="header-signin" nbButton *ngIf="!loggedIn"  status ="primary" size="small">Login</button>
+    <button class ="header-signup" nbButton *ngIf="!loggedIn" status ="primary" size="small">Sing Up</button>
+    <button nbButton *ngIf="loggedIn" status ="primary" size="small">Logout</button>
+    <button nbButton *ngIf="loggedIn"  status ="primary" size="small">Edit Profile</button>
+  <a classs = "header-go-main" nbButton status="primary" size="small" href=""> Go to main page</a>
+</div>

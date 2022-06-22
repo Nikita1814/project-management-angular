@@ -1,0 +1,50 @@
+footer {
+  padding: $main-padding;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+  column-gap: 2rem;
+  flex-direction: row;
+
+  @media (min-width: $medium-width) {
+    justify-content: space-between;
+  }
+}
+
+.footer-git-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+  page-break-after: always;
+  flex-grow: 1;
+
+  @media (min-width: $medium-width) {
+    page-break-after: auto;
+  }
+}
+
+.footer-git-link {
+  white-space: nowrap;
+  @extend %anchor-default;
+}
+
+.footer-copyright {
+  white-space: nowrap;
+  order: 3;
+
+  @media (min-width: $medium-width) {
+    order: 1;
+  }
+}
+
+.footer-course-logo {
+  order: 2;
+
+  @media (min-width: $medium-width) {
+    order: -1;
+  }
+}

@@ -1,0 +1,83 @@
+$heading-font-family: 'Oswald', sans-serif;
+$main-font-family: 'Roboto', sans-serif;
+$main-font-size: 16px;
+$main-font-weight: 300;
+
+$white-color: #ffffff;
+$black-color: #000000;
+
+$gray-color: #e5e5e5;
+$darkgray-color: #434b57;
+$violet-color: #7953f5;
+$red-color: #ed4a44;
+$yellow-color: #fca311;
+$green-color: #3b8f43;
+
+$main-bg-color: $violet-color;
+$emphasis-color: $yellow-color;
+
+$border-width: 2px;
+$border: $border-width solid $emphasis-color;
+$border-transparent: $border-width solid transparent;
+$border-radius: 0.4rem;
+$transition: 0.5s;
+
+$main-padding: 1rem;
+$half-padding: $main-padding * 0.5;
+$double-padding: $main-padding * 2;
+
+$min-width: 420px;
+$medium-width: 768px;
+$medium-second-width: 960px;
+$maximum-width: 1200px;
+
+%anchor-default {
+  color: $white-color;
+  text-decoration: none;
+  border: $border-transparent;
+  transition: $transition;
+  padding: $half-padding;
+
+  &:hover {
+    color: $emphasis-color;
+    transition: $transition;
+  }
+}
+
+%button-default {
+  cursor: pointer;
+  padding: $half-padding $main-padding;
+  font-size: 1rem;
+  transition: $transition;
+  border: $border-transparent;
+  text-decoration: none;
+
+  &:hover {
+    transition: $transition;
+    border-top: $border;
+  }
+}
+
+%button-color {
+  background-color: $white-color;
+  color: $main-bg-color;
+}
+
+%button-invert-color {
+  background-color: $main-bg-color;
+  color: $white-color;
+}
+
+%button-icon {
+  cursor: pointer;
+  padding: $half-padding $main-padding;
+  font-size: 1rem;
+  background-color: transparent;
+  transition: color $transition;
+  border: none;
+
+  &:hover {
+    color: $emphasis-color;
+    transition: $transition;
+  }
+}

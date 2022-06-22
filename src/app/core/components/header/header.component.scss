@@ -1,0 +1,76 @@
+@import '../../../../variables.scss';
+.header{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  column-gap: 1rem;
+  width:100%;
+  a,
+  button {
+    white-space: nowrap;
+  }
+
+  @media (min-width: $min-width) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: $maximum-width) {
+    flex-wrap: nowrap;
+  }
+}
+
+.header-new-board {
+  break-after: always;
+
+  @media (min-width: $medium-width) {
+    break-after: auto;
+  }
+}
+
+.header-edit,
+.header-logout,
+.header-new-board,
+.header-signin,
+.header-signup,
+.header-logout + .header-go-main {
+  font-weight: 400;
+  transition: $transition;
+  flex-grow: 1;
+
+  @media (min-width: $maximum-width) {
+    flex-grow: 0;
+  }
+}
+
+.header-signup,
+.header-signin,
+.header-go-main {
+  flex-grow: 1;
+  @media (min-width: $min-width) {
+    flex-grow: 0;
+  }
+}
+
+.header-signin,
+.header-go-main {
+  margin-left: auto;
+}
+
+.header-signin {
+  margin-left: unset;
+  @media (min-width: $min-width) {
+    margin-left: auto;
+  }
+}
+
+.header-logout + .header-go-main {
+  margin-left: unset;
+}
+
+.header-edit {
+  @media (min-width: $medium-width) {
+    margin-left: auto;
+  }
+}

@@ -5,6 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbToggleModule, NbUserModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { HeaderComponent } from './core/components/header/header.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -13,8 +18,16 @@ import { EffectsModule } from '@ngrx/effects';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    CoreModule,
+    //StoreModule.forRoot({}, {}),
+    //EffectsModule.forRoot([]),
+    NoopAnimationsModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbEvaIconsModule,
+    NbButtonModule,
+    NbToggleModule,
+    NbUserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
