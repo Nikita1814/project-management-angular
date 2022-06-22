@@ -10,6 +10,7 @@ import { NbThemeModule, NbLayoutModule, NbButtonModule, NbToggleModule, NbUserMo
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HeaderComponent } from './core/components/header/header.component';
 import { CoreModule } from './core/core.module';
+import { store } from './redux/store';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    //StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(store),
     //EffectsModule.forRoot([]),
     NoopAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
@@ -28,6 +29,7 @@ import { CoreModule } from './core/core.module';
     NbButtonModule,
     NbToggleModule,
     NbUserModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
