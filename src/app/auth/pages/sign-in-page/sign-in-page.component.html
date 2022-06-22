@@ -1,1 +1,41 @@
-<p>sign-in-page works!</p>
+<form (ngSubmit)="handleSignIn()" [formGroup]="signInForm" class="log-in-form">
+  <div class="input-grp">
+    <label class="block-label" htmlFor="login"> Login </label>
+    <nb-form-field>
+      <input nbInput id="login" placeholder="Login" type="email" formControlName="login">
+      <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
+    </nb-form-field>
+    <ng-container *ngIf="
+          signInForm.get('login')!.touched &&
+          signInForm.get('login')!.invalid
+        ">
+      <app-error-logger *ngIf="signInForm.get('login')!.errors" [error]="getErrorMsg( signInForm.get('login')!.errors, {
+            required: 'Please enter an email',
+            email: 'Email is invalid'
+          })"></app-error-logger>
+    </ng-container>
+  </div>
+  <div class="input-grp">
+    <label class="block-label" htmlFor="password"> Password </label>
+    <nb-form-field>
+      <nb-icon nbPrefix icon="unlock-outline" pack="eva"></nb-icon>
+      <input nbInput fullWidth id="password" placeholder="Pasword" type="password" formControlName="password" />
+    </nb-form-field>
+    <ng-container *ngIf="
+            signInForm.get('password')!.touched &&
+            signInForm.get('password')!.invalid
+          ">
+      <app-error-logger *ngIf="signInForm.get('password')!.errors" [error]="getErrorMsg( signInForm.get('password')!.errors, {
+              required: 'Please enter a password',
+              pattern:
+                'Your password is not strong enough,the passsword must contain at least 8 characters including: uppercase, lowercase, letters, numbers, special characters (! @ # ? )'
+            })"></app-error-logger>
+    </ng-container>
+  </div>
+  <div class="form-buttons">
+    <button nbButton status="primary" [disabled]="!signInForm.valid" type="submit" (click)="handleSignIn()">
+      Sign-In
+    </button>
+    <a href="auth/signUp" nbButton status="primary" [disabled]="!signInForm.valid"> Sign-Up</a>
+  </div>
+</form>

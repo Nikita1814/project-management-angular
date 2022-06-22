@@ -5,9 +5,9 @@
     RU
   </div>
     <button class="header-new-board" nbButton status="primary" size="small">Create a board</button>
-    <button clas="header-signin" nbButton *ngIf="!loggedIn"  status ="primary" size="small">Login</button>
-    <button class ="header-signup" nbButton *ngIf="!loggedIn" status ="primary" size="small">Sing Up</button>
+    <a href="/auth/signIn" routerLink="/auth/signIn" class="header-signin" nbButton *ngIf="!loggedIn"  status ="primary" size="small">Login</a>
+    <a href="/auth/signUp" routerLink="/auth/signUp" class ="header-signup" nbButton *ngIf="!loggedIn" status ="primary" size="small">Sing Up</a>
     <button nbButton *ngIf="loggedIn" status ="primary" size="small">Logout</button>
     <button nbButton *ngIf="loggedIn"  status ="primary" size="small">Edit Profile</button>
-  <a classs = "header-go-main" nbButton status="primary" size="small" href=""> Go to main page</a>
+  <a class = "header-go-main" nbButton status="primary" size="small" href=""> Go to main page</a>
 </div>

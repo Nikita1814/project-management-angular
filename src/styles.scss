@@ -6,3 +6,24 @@
   @include nb-theme-global();
 };
 /* You can add global styles to this file, and also import other style files */
+
+.input-grp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.block-label {
+  display: block;
+  text-align: center;
+  margin:16px;
+}
+
+.error-msg {
+  color: darkred;
+}
+
+a {
+  text-decoration: none;
+}
