@@ -22,7 +22,7 @@
     "@angular/router": "~13.2.0",
     "@nebular/eva-icons": "9.0.3",
     "@nebular/theme": "^9.0.3",
-    "@ngrx/effects": "^14.0.0",
+    "@ngrx/effects": "^13.2.0",
     "@ngrx/store": "^13.2.0",
     "eslint-plugin-rxjs": "^5.0.2",
     "eslint-plugin-rxjs-angular": "^2.0.0",

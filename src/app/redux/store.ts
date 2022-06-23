@@ -1,10 +1,11 @@
 import { ActionReducer } from "@ngrx/store";
 import { authReducer } from "./auth-reducer/auth.reducer";
+import { User } from "./types";
 
 
 export interface PageState {
-  token: ActionReducer<string>
+  user: ActionReducer<User>
 }
-export const store = {
-  token: authReducer
+export const store : PageState = {
+  user: authReducer
 }

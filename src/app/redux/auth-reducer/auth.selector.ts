@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { User } from '../types';
 
-const selectUserFeature = createFeatureSelector<string>('userToken');
+const selectUserFeature = createFeatureSelector<User>('user');
 
 export const selectUser = createSelector(
   selectUserFeature,
-  (state: string) => state
+  (state: User ) => state
 );

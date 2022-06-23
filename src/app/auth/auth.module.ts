@@ -7,17 +7,21 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbButtonModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule } from '@nebular/theme';
 import { SharedModule } from '../shared/shared.module';
-
+import { AccountManagementPageComponent } from './pages/account-management-page/account-management-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     SignInPageComponent,
     SignUpPageComponent,
-    ProfileEditPageComponent
+    ProfileEditPageComponent,
+    AccountManagementPageComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -26,7 +30,8 @@ import { SharedModule } from '../shared/shared.module';
     NbButtonModule,
     NbIconModule,
     NbLayoutModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ]
 })
 export class AuthModule { }

@@ -6,6 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { WelcomeFeatureCardComponent } from './components/welcome-feature-card/welcome-feature-card.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NbButton, NbButtonModule, NbToggleComponent, NbToggleModule, NbUserModule } from '@nebular/theme';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,9 +19,11 @@ import { NbButton, NbButtonModule, NbToggleComponent, NbToggleModule, NbUserModu
     FooterComponent,
   ],
   imports: [
+    RouterModule,
     CommonModule,
     NbButtonModule,
-    NbUserModule
+    NbUserModule,
+
   ],
   exports: [
     HeaderComponent,
