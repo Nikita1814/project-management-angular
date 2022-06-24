@@ -20,7 +20,7 @@ export const initiateSignIn = createAction(
 );
 
 export const authorizationError = createAction(
-  '[Authorization] AuthorizationError Error',
+  '[Authorization] Authorization Error',
   props<{ error: HttpErrorResponse }>()
 );
 
