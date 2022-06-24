@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { User } from '../types';
-import { initiateEdit, initiateSignIn, initiateSignUp, updateUser } from './auth.actions';
+import { clearAuthorizationError, initiateEdit, initiateSignIn, initiateSignUp, updateUser } from './auth.actions';
 import { selectUser } from './auth.selector';
 
 @Injectable({
@@ -24,5 +24,8 @@ export class AuthFacadeService {
 
   initiateEdit(user:User) {
     this.store.dispatch(initiateEdit({user: user}))
+  }
+  clearError(){
+    this.store.dispatch(clearAuthorizationError())
   }
 }

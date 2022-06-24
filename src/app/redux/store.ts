@@ -1,10 +1,10 @@
 import { ActionReducer } from "@ngrx/store";
 import { authReducer } from "./auth-reducer/auth.reducer";
-import { User } from "./types";
+import { AuthState, User } from "./types";
 
 
 export interface PageState {
-  user: ActionReducer<User>
+  user: ActionReducer<AuthState>
 }
 export const store : PageState = {
   user: authReducer

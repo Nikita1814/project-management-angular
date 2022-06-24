@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbToggleModule, NbUserModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbToggleModule, NbUserModule, NbDialogModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HeaderComponent } from './core/components/header/header.component';
 import { CoreModule } from './core/core.module';
 import { store } from './redux/store';
+import { AuthEffects } from './redux/auth-reducer/auth.effects';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { store } from './redux/store';
     AppRoutingModule,
     CoreModule,
     StoreModule.forRoot(store),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     NoopAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
@@ -29,6 +31,8 @@ import { store } from './redux/store';
     NbButtonModule,
     NbToggleModule,
     NbUserModule,
+    HttpClientModule,
+    NbDialogModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

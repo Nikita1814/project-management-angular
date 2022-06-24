@@ -3,11 +3,11 @@ import { createAction, props } from '@ngrx/store';
 import { User } from '../types';
 
 export const updateUser = createAction(
-  '[Authorization] SignIn / Edit SUCCESS',
+  '[Authorization] SignIn  SUCCESS',
   props<{ user: User }>()
 );
 
-export const finalizeSignUp = createAction('[SignUp Page] SignUp SUCCESS');
+export const finalizeSignUpAndEdit = createAction('[Authoeization] SignUp / Edit SUCCESS');
 
 export const initiateSignIn = createAction(
   '[SigngIn Page] Initiate SignIn',
@@ -22,6 +22,10 @@ export const initiateSignIn = createAction(
 export const authorizationError = createAction(
   '[Authorization] AuthorizationError Error',
   props<{ error: HttpErrorResponse }>()
+);
+
+export const clearAuthorizationError = createAction(
+  '[Authorization] AuthorizationError Error'
 );
 
 export const initiateSignUp = createAction(
