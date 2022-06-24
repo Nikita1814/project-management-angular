@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.service';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -24,13 +25,18 @@ export class SignInPageComponent implements OnInit {
       },
     ],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authFacade: AuthFacadeService) {}
 
   ngOnInit(): void {}
 
   handleSignIn() {
     if (this.signInForm.valid) {
       console.log('submitting the form');
+
+      this.authFacade.initiateSignIn({
+        login: this.signInForm.value.login,
+        password: this.signInForm.value.password,
+      });
     }
   }
 

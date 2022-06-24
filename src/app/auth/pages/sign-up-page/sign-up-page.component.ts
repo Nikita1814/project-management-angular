@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.service';
+import { User } from 'src/app/redux/types';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -30,11 +32,16 @@ export class SignUpPageComponent implements OnInit {
       },
     ],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authFacade: AuthFacadeService) {}
 
   handleSignUp() {
     if (this.signUpForm.valid) {
       console.log('form is valid uploading stuff');
+      this.authFacade.initiateSignUp({
+        name: this.signUpForm.value.name,
+        login: this.signUpForm.value.login,
+        password: this.signUpForm.value.password,
+      });
     }
   }
 

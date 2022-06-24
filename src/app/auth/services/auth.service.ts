@@ -1,20 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, switchMap } from 'rxjs';
+import { User } from 'src/app/redux/types';
 
+export interface UserSignUpResponse {
+  id: string;
+  name: string;
+  login: string;
+}
+
+export interface UserSignInResponse {
+  token: string;
+}
+export interface UserSignUpResponse {
+  id: string;
+  name: string;
+  login: string;
+}
+export interface UserEditResponse {
+  id: string,
+  name: string,
+  login: string
+}
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  url = '';
+  apiUrl = 'https://gentle-earth-67890.herokuapp.com/';
   constructor(private http: HttpClient) {}
 
-  SignUp(user: { login: ''; password: '' }) {
-
+  signUp(user: { name: string; login: string; password: string }) {
+    return this.http.post<UserSignUpResponse>(`${this.apiUrl}signup`, user);
+    /*.pipe( switchMap((response: UserSignUpResponse) => this.http.post<UserSignInResponse>(
+  `${this.apiUrl}signin`, {login: response.login, password: response.password})*/
   }
-  SignIn() {
-
+  signIn(user: { login: string; password: string }) {
+    return this.http.post<UserSignInResponse>(`${this.apiUrl}signin`, user);
   }
-  Edit() {
-    
+  edit(user: User) {
+    return this.http.put<UserEditResponse>(`${this.apiUrl}/users/${user.id}`, user);
   }
 }

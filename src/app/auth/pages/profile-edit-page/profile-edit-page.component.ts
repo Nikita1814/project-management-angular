@@ -43,6 +43,13 @@ export class ProfileEditPageComponent implements OnInit {
   handleEdit() {
     if (this.editForm.valid) {
       console.log('submitting the form');
+
+      this.authFacade.initiateEdit({
+        id:this.user.id,
+        name: this.editForm.value.name,
+        login: this.editForm.value.login,
+        password: this.editForm.value.password,
+      } as User);
     }
   }
 
