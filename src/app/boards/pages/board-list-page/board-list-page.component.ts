@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BoardListFacadeService } from 'src/app/redux/board-list-reducer/board-list-facade.service';
+import { BoardListItem } from '../../services/board.service';
 
 @Component({
   selector: 'app-board-list-page',
@@ -7,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardListPageComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public boardListFacade:BoardListFacadeService) { }
+  boardById(index: number, board: BoardListItem) {
+    return board.id;
+  }
   ngOnInit(): void {
   }
 

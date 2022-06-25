@@ -49,5 +49,8 @@ export class BoardService {
   createBoard(board: BoardCreationRequest) {
     return this.http.post<BoardListItem>(`${this.apiUrl}boards`, board);
   }
-
+  
+  deleteBoard(boardId: string){
+    return this.http.delete(`${this.apiUrl}boards/${boardId}`)
+ }
 }

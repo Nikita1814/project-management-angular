@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { BoardListItem, BoardService } from 'src/app/boards/services/board.service';
 import { BoardListFacadeService } from './board-list-facade.service';
-import { boardListError, initBoardCreation, requestBoardList, updateBoardList } from './board-list.actions';
+import { boardListError, initBoardCreation, initBoardDeletion, requestBoardList, updateBoardList } from './board-list.actions';
 @Injectable()
 export class AuthEffects {
   createBoard$ = createEffect(() => {
@@ -25,7 +25,21 @@ export class AuthEffects {
     );
   });
 
-
+  deeteBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(initBoardDeletion),
+      exhaustMap((action) =>
+        this.boardService.deleteBoard(action.boardId).pipe(
+          map((response: unknown) => {
+            return requestBoardList()
+          }),
+          catchError((error: unknown) => {
+            return of(boardListError({ error: error as HttpErrorResponse }));
+          })
+        )
+      )
+    );
+  });
   constructor(
     private actions$: Actions,
     private boardService: BoardService,

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http"
-import { BoardListItem } from "../boards/services/board.service"
+import { BoardListItem, Board } from "../boards/services/board.service"
 
 export interface User {
   id: string
@@ -17,4 +17,9 @@ export interface AuthState{
 export interface BoardListState{
   boardList: BoardListItem[],
   boardListError: HttpErrorResponse | null
+}
+
+export interface BoardState{
+  board: Board | null,
+  boardError: HttpErrorResponse | null
 }

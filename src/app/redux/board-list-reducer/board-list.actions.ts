@@ -22,6 +22,11 @@ export const clearBoardListError = createAction(
 )
 
 export const initBoardCreation = createAction(
-  ' [Board List Page] Init Board List Creation ',
+  ' [Board List Page] Init Board Creation ',
   props<{ board: BoardCreationRequest}>()
+)
+
+export const initBoardDeletion = createAction(
+  ' [Board List Page] Init Board Deletion ',
+  props<{ boardId: string}>()
 )

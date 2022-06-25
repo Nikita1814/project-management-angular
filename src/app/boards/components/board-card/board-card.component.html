@@ -1,1 +1,11 @@
-<p>board-card works!</p>
+    <nb-card size="small">
+      <nb-card-header>{{boardItem.title}}</nb-card-header>
+      <nb-card-body>
+        {{(boardItem.description.length>300)? (boardItem.description |
+          slice:0:300)+'..':(boardItem.description)}}
+      </nb-card-body>
+      <nb-card-footer>
+        <a nbButton status="primary"> Open </a>
+        <button nbButton status="primary"> Delete</button>
+      </nb-card-footer>
+    </nb-card>
