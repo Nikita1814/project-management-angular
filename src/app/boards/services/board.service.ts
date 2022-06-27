@@ -2,59 +2,59 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Task {
-  id: string,
-  title: string,
-  order: number,
-  description: string,
-  userId: string,
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
 }
 
 export interface TaskResponse extends Task {
-  boardId: string,
-  columnId: string,
+  boardId: string;
+  columnId: string;
 }
 
 export interface ColumnResponse {
-  id: string,
-  title: string,
-  order: number,
-  tasks: Task[]
+  id: string;
+  title: string;
+  order: number;
+  tasks: Task[];
 }
 
 export interface Board {
-  id: string,
-  title: string,
-  description: string,
-  columns: ColumnResponse[]
+  id: string;
+  title: string;
+  description: string;
+  columns: ColumnResponse[];
 }
 
 export interface BoardListItem {
-    id: string,
-    title: string,
-    description: string
+  id: string;
+  title: string;
+  description: string;
 }
 
 export interface BoardCreationRequest {
-  title: string,
-  description: string
+  title: string;
+  description: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BoardService {
   apiUrl = 'https://gentle-earth-67890.herokuapp.com/';
 
   constructor(private http: HttpClient) {}
-  getBoards( headers: HttpHeaders){
-  return this.http.get<BoardListItem[]>(`${this.apiUrl}boards`, {headers: headers})
+  getBoards() {
+    return this.http.get<BoardListItem[]>(`${this.apiUrl}boards`);
   }
 
-  createBoard(board: BoardCreationRequest, headers: HttpHeaders) {
-    return this.http.post<BoardListItem>(`${this.apiUrl}boards`, board), {headers: headers};
+  createBoard(board: BoardCreationRequest) {
+    return this.http.post<BoardListItem>(`${this.apiUrl}boards`, board);
   }
 
-  deleteBoard(boardId: string, headers: HttpHeaders){
-    return this.http.delete(`${this.apiUrl}boards/${boardId}`, {headers: headers})
- }
+  deleteBoard(boardId: string) {
+    return this.http.delete(`${this.apiUrl}boards/${boardId}`);
+  }
 }

@@ -9,6 +9,23 @@ import { BoardListFacadeService } from './board-list-facade.service';
 import { boardListError, initBoardCreation, initBoardDeletion, requestBoardList, updateBoardList } from './board-list.actions';
 @Injectable()
 export class AuthEffects {
+  getBoardList$ =  createEffect(() => {
+    
+    return this.actions$.pipe(
+      ofType(requestBoardList),
+      exhaustMap((action) =>
+        this.boardService.getBoards().pipe(
+          map((response: BoardListItem[]) => {
+            return updateBoardList({boardList: response })
+          }),
+          catchError((error: unknown) => {
+            return of(boardListError({ error: error as HttpErrorResponse }));
+          })
+        )
+      )
+    );
+  })
+
   createBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(initBoardCreation),
