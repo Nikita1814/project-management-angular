@@ -1,9 +1,10 @@
 <ng-container *ngIf="boardListFacadeService.boardList$ | async as boardList">
   <section class="board-card-list">
+    <div class="board-item" (click)=""></div>
     <app-board-card *ngFor="let board of boardList let index=index; trackBy:boardById" [boardItem]="board"></app-board-card>
-    <h2 *ngIf="boardList.length === 0">
+    <!--<h2 *ngIf="boardList.length === 0">
       Unfortunately there are no boards to display yet. If you may be so inclined, please, help youself to the board creation form through the respective button in the header.
-    </h2>
+    </h2>-->
   </section>
 
 </ng-container>

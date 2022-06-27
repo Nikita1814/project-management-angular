@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BoardListItem } from '../../services/board.service';
+import { NbDialogService } from '@nebular/theme';
+import { BoardListFacadeService } from 'src/app/redux/board-list-reducer/board-list-facade.service';
+import { DialogueModalComponent } from 'src/app/shared/components/dialogue-modal/dialogue-modal.component';
+import { BoardListItem, BoardService } from '../../services/board.service';
 
 @Component({
   selector: 'app-board-card',
@@ -8,8 +11,20 @@ import { BoardListItem } from '../../services/board.service';
 })
 export class BoardCardComponent implements OnInit {
 @Input() boardItem!:BoardListItem
-  constructor() { }
+  constructor( private dialogService: NbDialogService, private boardListFacade: BoardListFacadeService) { }
 
+
+  openDeleteModal (){
+    this.dialogService.open(DialogueModalComponent, {
+      context: {
+        title: 'Are you sure you want to delete the card?',
+        message: ``,
+        DeclineActionFunction: () => {return},
+        AcceptActionFunction: () => this.boardListFacade.deleteBoard(this.boardItem.id)
+
+      }});
+
+  }
   ngOnInit(): void {
   }
 

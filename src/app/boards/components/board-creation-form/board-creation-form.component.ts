@@ -17,23 +17,16 @@ export class BoardCreationFormComponent implements OnInit {
       },
     ],
     description: [''],
-    password: [
-      '',
-      {
-        validators: [Validators.required],
-      },
-    ],
   });
   constructor(private fb: FormBuilder, private boardListFacade: BoardListFacadeService) {}
 
   handleSignUp() {
     if (this.boardForm.valid) {
       console.log('form is valid uploading stuff');
-      /*this.authFacade.initiateSignUp({
-        name: this.signUpForm.value.name,
-        login: this.signUpForm.value.login,
-        password: this.signUpForm.value.password,
-      });*/
+      this.boardListFacade.initiateBoardCreation({
+        title: this.boardForm.value.title,
+        description: this.boardForm.value.description,
+      });
     }
   }
 

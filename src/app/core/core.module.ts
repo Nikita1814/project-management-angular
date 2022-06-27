@@ -5,7 +5,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeFeatureCardComponent } from './components/welcome-feature-card/welcome-feature-card.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { NbButton, NbButtonModule, NbToggleComponent, NbToggleModule, NbUserModule } from '@nebular/theme';
+import { NbButton, NbButtonModule, NbToggleComponent, NbToggleModule, NbUserModule, NbWindowModule } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
 
 
@@ -23,12 +23,11 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     NbButtonModule,
     NbUserModule,
-
   ],
   exports: [
     HeaderComponent,
     WelcomePageComponent,
-    FooterComponent
+    FooterComponent,
   ]
 })
 export class CoreModule { }

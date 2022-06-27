@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbToggleModule, NbUserModule, NbDialogModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbToggleModule, NbUserModule, NbDialogModule, NbWindowModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HeaderComponent } from './core/components/header/header.component';
 import { CoreModule } from './core/core.module';
@@ -33,7 +33,8 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
     NbToggleModule,
     NbUserModule,
     HttpClientModule,
-    NbDialogModule.forRoot()
+    NbDialogModule.forRoot(),
+    NbWindowModule.forChild(),
   ],
   providers: [
     {

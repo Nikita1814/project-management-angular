@@ -4,7 +4,7 @@
     <label class="block-label" htmlFor="title"> Title </label>
     <nb-form-field>
       <input nbInput id="title" placeholder="Title" type="text" formControlName="title">
-      <nb-icon nbPrefix icon="person-outline" pack="eva"></nb-icon>
+      <nb-icon nbPrefix icon="text-outline" pack="eva"></nb-icon>
     </nb-form-field>
     <ng-container *ngIf="
           boardForm.get('title')!.touched &&
@@ -20,7 +20,7 @@
     <label class="block-label" htmlFor="description"> Description </label>
     <nb-form-field>
       <input nbInput id="login" placeholder="Description" type="text" formControlName="description">
-      <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
+      <nb-icon nbPrefix icon="file-text-outline" pack="eva"></nb-icon>
     </nb-form-field>
     <ng-container *ngIf="
           boardForm.get('description')!.touched &&
@@ -29,9 +29,8 @@
     </ng-container>
   </div>
   <div class="form-buttons">
-    <!--<button nbButton status="primary" [disabled]="!boardForm.valid" type="submit" (click)="handleSignUp()">
-      Sign-Up
+    <button nbButton status="primary" [disabled]="!boardForm.valid" type="submit" (click)="handleCreate()">
+      Create
     </button>
-    <a href="auth/signIn" nbButton status="primary" [disabled]="!boardForm.valid"> Sign-in</a>-->
   </div>
 </form>
