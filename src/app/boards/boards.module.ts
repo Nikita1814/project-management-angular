@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { BoardCreationFormComponent } from './components/board-creation-form/board-creation-form.component';
+import { BoardsRoutingModule } from './boards-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -24,6 +26,8 @@ import { BoardCreationFormComponent } from './components/board-creation-form/boa
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    BoardsRoutingModule,
     NbCardModule,
     NbButtonModule,
     NbDialogModule.forChild(),
