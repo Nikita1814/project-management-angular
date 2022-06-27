@@ -9,6 +9,9 @@
     <a href="/auth/signUp" routerLink="/auth/signUp" class ="header-signup" nbButton *ngIf="!loggedIn" status ="primary" size="small">Sing Up</a>
     <button nbButton *ngIf="loggedIn" status ="primary" size="small">Logout</button>
     <button nbButton *ngIf="loggedIn"  status ="primary" size="small">Edit Profile</button>-->
-    <a [routerLink]="['/auth']" nbButton  status ="primary" size="small">Manage Profile</a>
-  <a class = "header-go-main" nbButton status="primary" size="small" href=""> Go to main page</a>
+    <a [routerLink]="['/auth']" nbButton status ="primary" size="small">Manage Profile</a>
+  <a  [routerLink]="['/']"class = "header-go-main" nbButton status="primary" size="small" > Go to main page</a>
+  <ng-container *ngIf="this.authFacade.user$ | async as user" >
+    <nb-user name="{{user.name}}" title="{{user.login}}"></nb-user>
+</ng-container>
 </div>

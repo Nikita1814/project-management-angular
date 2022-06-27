@@ -4,5 +4,5 @@
       routerLink="/auth/signIn"> Sign in</a> or <a nbButton status="primary" size="giant" routerLink="/auth/signUp">
       Sign Up</a></h2>
   <h2 *ngIf="user.token"> Would you like to <a nbButton status="primary" size="giant" routerLink="/auth/edit"> Edit
-      Profile</a> or <button nbButton status="primary" size="giant">Log Out</button> </h2>
+      Profile</a> or <button (click)="authFacade.logOut" nbButton status="primary" size="giant">Log Out</button> </h2>
 </ng-container>

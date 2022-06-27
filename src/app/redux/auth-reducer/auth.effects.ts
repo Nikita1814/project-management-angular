@@ -21,6 +21,7 @@ import {
   initiateEdit,
   initiateSignIn,
   initiateSignUp,
+  logOut,
   updateUser,
 } from './auth.actions';
 @Injectable()
@@ -31,12 +32,15 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.authService.signIn(action.user).pipe(
           map((response: UserSignInResponse) => {
+            console.log('recieved response', response)
             const parsedUser = jwtDecode(response.token) as User;
+            console.log('parsed user as', parsedUser)
             return updateUser({
               user: { ...parsedUser, token: response.token } as User,
             });
           }),
           catchError((error: unknown) => {
+            console.log('caught a sign up error');
             this.dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
@@ -57,10 +61,13 @@ export class AuthEffects {
       ofType(initiateSignUp),
       exhaustMap((action) =>
         this.authService.signUp(action.user).pipe(
+
           map((response: UserSignUpResponse) => {
+            console.log('sign up initiated');
             return finalizeSignUpAndEdit();
           }),
           catchError((error: unknown) => {
+            console.log('sign up error detected');
             this.dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
@@ -107,6 +114,7 @@ export class AuthEffects {
     );
   });
 
+  
   constructor(
     private actions$: Actions,
     private authService: AuthService,

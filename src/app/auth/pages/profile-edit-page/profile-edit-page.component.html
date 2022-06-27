@@ -1,8 +1,9 @@
 <form (ngSubmit)="handleEdit()" [formGroup]="editForm" class="log-in-form">
+  <ng-container *ngIf="this.authFacade.user$ | async as user" >
   <div class="input-grp">
     <label class="block-label" htmlFor="name"> Name </label>
     <nb-form-field>
-      <input nbInput id="name" placeholder="Name" type="text" formControlName="name">
+      <input nbInput id="name" placeholder="Name" type="text"  formControlName="name">
       <nb-icon nbPrefix icon="person-outline" pack="eva"></nb-icon>
     </nb-form-field>
     <ng-container *ngIf="
@@ -18,7 +19,7 @@
   <div class="input-grp">
     <label class="block-label" htmlFor="login"> Login </label>
     <nb-form-field>
-      <input nbInput id="login" placeholder="Login" type="email" formControlName="login">
+      <input nbInput id="login" placeholder="Login" type="email" value="{{user.login}}" formControlName="login">
       <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
     </nb-form-field>
     <ng-container *ngIf="
@@ -35,7 +36,7 @@
     <label class="block-label" htmlFor="password"> Password </label>
     <nb-form-field>
       <nb-icon nbPrefix icon="unlock-outline" pack="eva"></nb-icon>
-      <input nbInput fullWidth id="password" placeholder="Pasword" type="password" formControlName="password" />
+      <input nbInput fullWidth id="password" placeholder="Pasword" type="password" value="{{user.password}}" formControlName="password" />
     </nb-form-field>
     <ng-container *ngIf="
             editForm.get('password')!.touched &&
@@ -48,6 +49,7 @@
             })"></app-error-logger>
     </ng-container>
   </div>
+</ng-container>
     <button nbButton status="primary" [disabled]="!editForm.valid" type="submit" (click)="handleEdit()">
       Edit
     </button>

@@ -31,7 +31,10 @@ export class SignInPageComponent implements OnInit {
 
   handleSignIn() {
     if (this.signInForm.valid) {
-      console.log('submitting the form');
+      console.log('submitting the form with', {
+        login: this.signInForm.value.login,
+        password: this.signInForm.value.password,
+      });
 
       this.authFacade.initiateSignIn({
         login: this.signInForm.value.login,

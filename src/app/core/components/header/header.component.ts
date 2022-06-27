@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   langRu=false
   loggedIn=false
-  constructor() { }
+  constructor( public authFacade: AuthFacadeService) {
+
+  }
 
   ngOnInit(): void {
   }

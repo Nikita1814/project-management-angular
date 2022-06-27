@@ -34,10 +34,8 @@ export class ProfileEditPageComponent implements OnInit {
     ],
   });
 
-  constructor(private fb: FormBuilder, private authFacade: AuthFacadeService) {
-    this.authFacade.user$.subscribe(
-      (user: User) => (this.user = user)
-    );
+  constructor(private fb: FormBuilder, public authFacade: AuthFacadeService) {
+
   }
 
   handleEdit() {
@@ -45,7 +43,7 @@ export class ProfileEditPageComponent implements OnInit {
       console.log('submitting the form');
 
       this.authFacade.initiateEdit({
-        id:this.user.id,
+        id: this.user.id,
         name: this.editForm.value.name,
         login: this.editForm.value.login,
         password: this.editForm.value.password,
@@ -62,5 +60,12 @@ export class ProfileEditPageComponent implements OnInit {
       : '';
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authFacade.user$.subscribe(
+      (user: User) =>{
+        console.log('user is ', user);
+        this.user = user
+      }
+    );
+  }
 }

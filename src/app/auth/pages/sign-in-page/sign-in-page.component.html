@@ -36,6 +36,6 @@
     <button nbButton status="primary" [disabled]="!signInForm.valid" type="submit" (click)="handleSignIn()">
       Sign-In
     </button>
-    <a href="auth/signUp" nbButton status="primary" [disabled]="!signInForm.valid"> Sign-Up</a>
+    <a routerLink="/auth/signUp" nbButton status="primary"> Sign-Up</a>
   </div>
 </form>
