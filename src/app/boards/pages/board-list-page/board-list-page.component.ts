@@ -14,6 +14,7 @@ export class BoardListPageComponent implements OnInit {
     return board.id;
   }
   ngOnInit(): void {
+    this.boardListFacade.requestBoardList()
   }
 
 }

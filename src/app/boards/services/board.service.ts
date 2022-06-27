@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Task {
@@ -44,13 +44,17 @@ export interface BoardCreationRequest {
 })
 export class BoardService {
   apiUrl = 'https://gentle-earth-67890.herokuapp.com/';
-  constructor(private http: HttpClient) {}
 
-  createBoard(board: BoardCreationRequest) {
-    return this.http.post<BoardListItem>(`${this.apiUrl}boards`, board);
+  constructor(private http: HttpClient) {}
+  getBoards( headers: HttpHeaders){
+  return this.http.get<BoardListItem[]>(`${this.apiUrl}boards`, {headers: headers})
   }
-  
-  deleteBoard(boardId: string){
-    return this.http.delete(`${this.apiUrl}boards/${boardId}`)
+
+  createBoard(board: BoardCreationRequest, headers: HttpHeaders) {
+    return this.http.post<BoardListItem>(`${this.apiUrl}boards`, board), {headers: headers};
+  }
+
+  deleteBoard(boardId: string, headers: HttpHeaders){
+    return this.http.delete(`${this.apiUrl}boards/${boardId}`, {headers: headers})
  }
 }

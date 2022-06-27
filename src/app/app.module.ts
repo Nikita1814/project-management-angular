@@ -12,7 +12,8 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { CoreModule } from './core/core.module';
 import { store } from './redux/store';
 import { AuthEffects } from './redux/auth-reducer/auth.effects';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './interceptors/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     NbDialogModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
