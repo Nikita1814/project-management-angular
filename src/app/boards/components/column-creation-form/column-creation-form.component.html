@@ -1,0 +1,23 @@
+<form (ngSubmit)="handleBoardCreation()" [formGroup]="columnForm" class="board-form">
+  <div class="input-grp">
+    <label class="block-label" htmlFor="title"> Title </label>
+    <nb-form-field>
+      <input nbInput id="title" placeholder="Title" type="text" formControlName="title">
+      <nb-icon nbPrefix icon="text-outline" pack="eva"></nb-icon>
+    </nb-form-field>
+    <ng-container *ngIf="
+          columnForm.get('title')!.touched &&
+          columnForm.get('title')!.invalid
+        ">
+      <app-error-logger *ngIf="columnForm.get('title')!.errors" [error]="getErrorMsg( columnForm.get('title')!.errors, {
+            required: 'Please enter a title'
+          })">
+      </app-error-logger>
+    </ng-container>
+  </div>
+  <div class="form-buttons">
+    <button nbButton status="primary" [disabled]="!columnForm.valid" type="submit" (click)="handleSubmit()">
+      {{context.type=== create ? Create : Update}}
+    </button>
+  </div>
+</form>

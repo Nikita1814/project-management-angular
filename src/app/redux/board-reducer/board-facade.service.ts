@@ -34,7 +34,7 @@ requestBoard(id:string){
     this.store.dispatch(clearBoardError());
   }
 
-  initiateColummnCreation(column: ColumnCreationRequest, boardId: string) {
+  initiateColumnCreation(column: ColumnCreationRequest, boardId: string) {
     this.store.dispatch(initColumnCreation({ column, boardId }));
   }
 

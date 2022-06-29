@@ -20,7 +20,7 @@ export class BoardCreationFormComponent implements OnInit {
   });
   constructor(private fb: FormBuilder, private boardListFacade: BoardListFacadeService) {}
 
-  handleSignUp() {
+  handleCreate() {
     if (this.boardForm.valid) {
       console.log('form is valid uploading stuff');
       this.boardListFacade.initiateBoardCreation({

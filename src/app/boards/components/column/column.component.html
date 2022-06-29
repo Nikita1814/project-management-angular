@@ -3,14 +3,14 @@
     <nb-card-header>{{column.title}}</nb-card-header>
     <nb-card-body>
       <nb-list>
-    <nb-list-item *ngFor = "let task of column.tasks as task let index=index; trackBy:boardById">
+    <nb-list-item *ngFor = "let task of column.tasks as task let index=index; trackBy:taskById">
       <app-task [task]="task" [columnId]="column.id" [boardId]="boardId"></app-task>
     </nb-list-item>
     </nb-list>
   </nb-card-body>
     <nb-card-footer>
-      <button (click)="openDeletionModal" nbButton status="danger"> Delete</button>
-      <button (click)="openCreationForm" nbButton> Add a task</button>
+      <button (click)="openDeletionModal()" nbButton status="danger"> Delete</button>
+      <button (click)="openCreationForm()" nbButton> Add a task</button>
     </nb-card-footer>
   </nb-card>
 

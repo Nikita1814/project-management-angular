@@ -13,6 +13,7 @@ import { BoardCreationFormComponent } from './components/board-creation-form/boa
 import { BoardsRoutingModule } from './boards-routing.module';
 import { RouterModule } from '@angular/router';
 import { TaskCreationFormComponent } from './components/task-creation-form/task-creation-form.component';
+import { ColumnCreationFormComponent } from './components/column-creation-form/column-creation-form.component';
 
 
 
@@ -24,7 +25,8 @@ import { TaskCreationFormComponent } from './components/task-creation-form/task-
     ColumnComponent,
     TaskComponent,
     BoardCreationFormComponent,
-    TaskCreationFormComponent
+    TaskCreationFormComponent,
+    ColumnCreationFormComponent
   ],
   imports: [
     CommonModule,

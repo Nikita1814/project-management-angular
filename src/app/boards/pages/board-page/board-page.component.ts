@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
 import { BoardFacadeService } from 'src/app/redux/board-reducer/board-facade.service';
 import { BoardCreationFormComponent } from '../../components/board-creation-form/board-creation-form.component';
+import { ColumnResponse } from '../../services/board.service';
 
 @Component({
   selector: 'app-board-page',
@@ -18,7 +19,9 @@ export class BoardPageComponent implements OnInit {
     this.boardFacade.requestBoard(boardId)
   }
 
-
+  taskById(index: number, column: ColumnResponse) {
+    return column.id;
+  }
   openCreationForm() {
     this.windowService.open(BoardCreationFormComponent, {
       buttons: {
@@ -26,6 +29,9 @@ export class BoardPageComponent implements OnInit {
         maximize: true,
         fullScreen: true,
         close: true,
+      },
+      context: {
+        boardId: this.boardId,
       },
     });
   }

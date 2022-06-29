@@ -1,0 +1,11 @@
+.board-list{
+  padding: 0;
+  display: flex;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  overflow-x: auto;
+  flex-grow: 1;
+  justify-content: start;
+  flex-grow: 1;
+  padding: 0.5rem;
+}
