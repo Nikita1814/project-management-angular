@@ -12,31 +12,29 @@ export class ProfileEditPageComponent implements OnInit {
   user: User = {} as User;
   editForm = this.fb.group({
     name: [
-      this.user.name,
+      { value: this.user.name },
       {
         validators: [Validators.required],
       },
     ],
     login: [
-      this.user.login,
+      { value: this.user.login },
       {
         validators: [
           Validators.required,
           Validators.pattern(/[A-Za-z0-9!@#?]/),
-        ],
+        ]
       },
     ],
     password: [
-      this.user.password,
+      { value: this.user.password },
       {
         validators: [Validators.required],
       },
     ],
   });
 
-  constructor(private fb: FormBuilder, public authFacade: AuthFacadeService) {
-
-  }
+  constructor(private fb: FormBuilder, public authFacade: AuthFacadeService) {}
 
   handleEdit() {
     if (this.editForm.valid) {
@@ -61,11 +59,9 @@ export class ProfileEditPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authFacade.user$.subscribe(
-      (user: User) =>{
-        console.log('user is ', user);
-        this.user = user
-      }
-    );
+    this.authFacade.user$.subscribe((user: User) => {
+      console.log('user is ', user);
+      this.user = user;
+    });
   }
 }

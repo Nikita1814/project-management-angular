@@ -1,4 +1,4 @@
-<form (ngSubmit)="handleBoardCreation()" [formGroup]="columnForm" class="board-form">
+<form (ngSubmit)="handleSubmit()" [formGroup]="columnForm" class="board-form">
   <div class="input-grp">
     <label class="block-label" htmlFor="title"> Title </label>
     <nb-form-field>
@@ -17,7 +17,7 @@
   </div>
   <div class="form-buttons">
     <button nbButton status="primary" [disabled]="!columnForm.valid" type="submit" (click)="handleSubmit()">
-      {{context.type=== create ? Create : Update}}
+      Create
     </button>
   </div>
 </form>

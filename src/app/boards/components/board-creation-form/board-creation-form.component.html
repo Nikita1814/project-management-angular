@@ -1,5 +1,5 @@
 
-<form (ngSubmit)="handleBoardCreation()" [formGroup]="boardForm" class="board-form">
+<form (ngSubmit)="handleSubmit()" [formGroup]="boardForm" class="board-form">
   <div class="input-grp">
     <label class="block-label" htmlFor="title"> Title </label>
     <nb-form-field>
@@ -29,7 +29,7 @@
     </ng-container>
   </div>
   <div class="form-buttons">
-    <button nbButton status="primary" [disabled]="!boardForm.valid" type="submit" (click)="handleCreate()">
+    <button nbButton status="primary" [disabled]="!boardForm.valid" type="submit" (click)="handleSubmit()">
       Create
     </button>
   </div>
