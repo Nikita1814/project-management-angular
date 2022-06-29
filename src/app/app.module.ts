@@ -14,6 +14,8 @@ import { store } from './redux/store';
 import { AuthEffects } from './redux/auth-reducer/auth.effects';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
+import { BoardListEffects } from './redux/board-list-reducer/board-list.effects';
+import { BoardEffects } from './redux/board-reducer/board.effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
     AppRoutingModule,
     CoreModule,
     StoreModule.forRoot(store),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, BoardListEffects, BoardEffects]),
     NoopAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,

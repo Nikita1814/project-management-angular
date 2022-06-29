@@ -8,9 +8,9 @@ import { BoardListItem, BoardService } from 'src/app/boards/services/board.servi
 import { BoardListFacadeService } from './board-list-facade.service';
 import { boardListError, initBoardCreation, initBoardDeletion, requestBoardList, updateBoardList } from './board-list.actions';
 @Injectable()
-export class AuthEffects {
+export class BoardListEffects {
   getBoardList$ =  createEffect(() => {
-    
+
     return this.actions$.pipe(
       ofType(requestBoardList),
       exhaustMap((action) =>
