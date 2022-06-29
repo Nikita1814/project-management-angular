@@ -6,7 +6,7 @@ import { BoardFacadeService } from 'src/app/redux/board-reducer/board-facade.ser
 import { Task } from '../../services/board.service';
 
 export interface CreationFormConfig {
-  task: Task;
+  task?: Task;
   boardId: string;
   columnId: string;
   type: 'create' | 'update';
@@ -21,12 +21,12 @@ export class TaskCreationFormComponent implements OnInit {
   context:  CreationFormConfig = this.windowRef.config.context! as CreationFormConfig
   taskForm = this.fb.group({
     title: [
-      this.context.type==='create' ? '' : {value:this.context.task.title},
+      this.context.type==='create' ? '' : {value:this.context.task!.title},
       {
         validators: [Validators.required],
       },
     ],
-    description: [this.context.type==='create' ? '' : {value:this.context.task.description}],
+    description: [this.context.type==='create' ? '' : {value:this.context.task!.description}],
   });
   constructor(
     private fb: FormBuilder,
@@ -52,14 +52,14 @@ export class TaskCreationFormComponent implements OnInit {
       if (this.context.type === 'update') {
         this.boardFacade.initiateTaskUpdate(
           {
-            ...this.context.task,
+            ...this.context.task!,
             title: this.taskForm.value.title,
             description: this.taskForm.value.description,
             userId: this.authFacade.showUserId(),
             boardId: this.context.boardId,
             columnId: this.context.columnId
           },
-          this.context.task.id
+          this.context.task!.id
         );
       }
     }

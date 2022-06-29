@@ -22,10 +22,10 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openDeleteModal() {
+  openDeletionModal() {
     this.dialogService.open(DialogueModalComponent, {
       context: {
-        title: 'Are you sure you want to delete the task?',
+        title: `Are you sure you want to delete the ${this.task.title} task?`,
         message: ``,
         DeclineActionFunction: () => {
           return;
