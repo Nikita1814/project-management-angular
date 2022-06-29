@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
+import { BoardFacadeService } from 'src/app/redux/board-reducer/board-facade.service';
 import { BoardCreationFormComponent } from '../../components/board-creation-form/board-creation-form.component';
 
 @Component({
@@ -8,10 +10,12 @@ import { BoardCreationFormComponent } from '../../components/board-creation-form
   styleUrls: ['./board-page.component.scss']
 })
 export class BoardPageComponent implements OnInit {
-
-  constructor(private windowService: NbWindowService) { }
+  boardId: string = ''
+  constructor(private windowService: NbWindowService, private route: ActivatedRoute, public boardFacade: BoardFacadeService) { }
 
   ngOnInit(): void {
+    const boardId = this.route.snapshot.params['id'];
+    this.boardFacade.requestBoard(boardId)
   }
 
 

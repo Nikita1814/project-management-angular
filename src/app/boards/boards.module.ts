@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BoardCreationFormComponent } from './components/board-creation-form/board-creation-form.component';
 import { BoardsRoutingModule } from './boards-routing.module';
 import { RouterModule } from '@angular/router';
+import { TaskCreationFormComponent } from './components/task-creation-form/task-creation-form.component';
 
 
 
@@ -22,7 +23,8 @@ import { RouterModule } from '@angular/router';
     BoardCardComponent,
     ColumnComponent,
     TaskComponent,
-    BoardCreationFormComponent
+    BoardCreationFormComponent,
+    TaskCreationFormComponent
   ],
   imports: [
     CommonModule,

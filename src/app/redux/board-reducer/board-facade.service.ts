@@ -17,14 +17,18 @@ import {
   initTaskUpdate,
   requestBoard,
 } from './board.actions';
-import { selectBoardList } from './board.selectors';
+import { selectBoard} from './board.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardFacadeService {
-  boardList$ = this.store.select(selectBoardList);
+  board$ = this.store.select(selectBoard);
   constructor(private store: Store) {}
+
+requestBoard(id:string){
+  this.store.dispatch(requestBoard({id}))
+}
 
   clearError() {
     this.store.dispatch(clearBoardError());

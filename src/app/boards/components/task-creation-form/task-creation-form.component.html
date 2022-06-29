@@ -1,0 +1,35 @@
+<form (ngSubmit)="handleBoardCreation()" [formGroup]="taskForm" class="board-form">
+  <div class="input-grp">
+    <label class="block-label" htmlFor="title"> Title </label>
+    <nb-form-field>
+      <input nbInput id="title" placeholder="Title" type="text" formControlName="title">
+      <nb-icon nbPrefix icon="text-outline" pack="eva"></nb-icon>
+    </nb-form-field>
+    <ng-container *ngIf="
+          taskForm.get('title')!.touched &&
+          taskForm.get('title')!.invalid
+        ">
+      <app-error-logger *ngIf="taskForm.get('title')!.errors" [error]="getErrorMsg( taskForm.get('title')!.errors, {
+            required: 'Please enter a title'
+          })">
+      </app-error-logger>
+    </ng-container>
+  </div>
+  <div class="input-grp">
+    <label class="block-label" htmlFor="description"> Description </label>
+    <nb-form-field>
+      <input nbInput id="login" placeholder="Description" type="text" formControlName="description">
+      <nb-icon nbPrefix icon="file-text-outline" pack="eva"></nb-icon>
+    </nb-form-field>
+    <ng-container *ngIf="
+          taskForm.get('description')!.touched &&
+          taskForm.get('description')!.invalid
+        ">
+    </ng-container>
+  </div>
+  <div class="form-buttons">
+    <button nbButton status="primary" [disabled]="!taskForm.valid" type="submit" (click)="handleSubmit()">
+      {{context.type=== create ? Create : Update}}
+    </button>
+  </div>
+</form>
