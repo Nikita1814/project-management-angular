@@ -37,7 +37,11 @@ export class AuthEffects {
             console.log('parsed user as', parsedUser);
             this.router.navigate(['auth']);
             return updateUser({
-              user: { ...parsedUser, password: action.user.password, token: response.token } as User,
+              user: {
+                ...parsedUser,
+                password: action.user.password,
+                token: response.token,
+              } as User,
             });
           }),
           catchError((error: unknown) => {
@@ -45,9 +49,12 @@ export class AuthEffects {
             this.dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
-                message: `${(error as HttpErrorResponse).status}: ${(error as HttpErrorResponse).message}`,
-                closingActionFunction: this.authFacade.clearError
-              }});
+                message: `${(error as HttpErrorResponse).status}: ${
+                  (error as HttpErrorResponse).message
+                }`,
+                closingActionFunction: this.authFacade.clearError,
+              },
+            });
             return of(
               authorizationError({ error: error as HttpErrorResponse })
             );
@@ -62,7 +69,6 @@ export class AuthEffects {
       ofType(initiateSignUp),
       exhaustMap((action) =>
         this.authService.signUp(action.user).pipe(
-
           map((response: UserSignUpResponse) => {
             console.log('sign up initiated');
             return finalizeSignUpAndEdit();
@@ -72,9 +78,12 @@ export class AuthEffects {
             this.dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
-                message: `${(error as HttpErrorResponse).status}: ${(error as HttpErrorResponse).message}`,
-                closingActionFunction: this.authFacade.clearError
-              }});
+                message: `${(error as HttpErrorResponse).status}: ${
+                  (error as HttpErrorResponse).message
+                }`,
+                closingActionFunction: this.authFacade.clearError,
+              },
+            });
             return of(
               authorizationError({ error: error as HttpErrorResponse })
             );
@@ -96,9 +105,12 @@ export class AuthEffects {
             this.dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
-                message: `${(error as HttpErrorResponse).status}: ${(error as HttpErrorResponse).message}`,
-                closingActionFunction: this.authFacade.clearError
-              }});
+                message: `${(error as HttpErrorResponse).status}: ${
+                  (error as HttpErrorResponse).message
+                }`,
+                closingActionFunction: this.authFacade.clearError,
+              },
+            });
             return of(
               authorizationError({ error: error as HttpErrorResponse })
             );
@@ -114,7 +126,6 @@ export class AuthEffects {
       tap(() => this.router.navigate(['/auth/logIn']))
     );
   });
-
 
   constructor(
     private actions$: Actions,

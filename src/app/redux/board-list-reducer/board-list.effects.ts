@@ -4,27 +4,45 @@ import { NbDialogService } from '@nebular/theme';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
-import { BoardListItem, BoardService } from 'src/app/boards/services/board.service';
+import {
+  BoardListItem,
+  BoardService,
+} from 'src/app/boards/services/board.service';
+import { ErrorModalComponent } from 'src/app/shared/components/error-modal/error-modal.component';
 import { BoardListFacadeService } from './board-list-facade.service';
-import { boardListError, initBoardCreation, initBoardDeletion, requestBoardList, updateBoardList } from './board-list.actions';
+import {
+  boardListError,
+  initBoardCreation,
+  initBoardDeletion,
+  requestBoardList,
+  updateBoardList,
+} from './board-list.actions';
 @Injectable()
 export class BoardListEffects {
-  getBoardList$ =  createEffect(() => {
-
+  getBoardList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(requestBoardList),
       exhaustMap((action) =>
         this.boardService.getBoards().pipe(
           map((response: BoardListItem[]) => {
-            return updateBoardList({boardList: response })
+            return updateBoardList({ boardList: response });
           }),
           catchError((error: unknown) => {
+            this.dialogService.open(ErrorModalComponent, {
+              context: {
+                title: 'An error has occured',
+                message: `${(error as HttpErrorResponse).status}: ${
+                  (error as HttpErrorResponse).message
+                }`,
+                closingActionFunction: () => this.boardListFacade.clearError(),
+              },
+            });
             return of(boardListError({ error: error as HttpErrorResponse }));
           })
         )
       )
     );
-  })
+  });
 
   createBoard$ = createEffect(() => {
     return this.actions$.pipe(
@@ -32,9 +50,18 @@ export class BoardListEffects {
       exhaustMap((action) =>
         this.boardService.createBoard(action.board).pipe(
           map((response: BoardListItem) => {
-            return requestBoardList()
+            return requestBoardList();
           }),
           catchError((error: unknown) => {
+            this.dialogService.open(ErrorModalComponent, {
+              context: {
+                title: 'An error has occured',
+                message: `${(error as HttpErrorResponse).status}: ${
+                  (error as HttpErrorResponse).message
+                }`,
+                closingActionFunction: () => this.boardListFacade.clearError(),
+              },
+            });
             return of(boardListError({ error: error as HttpErrorResponse }));
           })
         )
@@ -48,9 +75,18 @@ export class BoardListEffects {
       exhaustMap((action) =>
         this.boardService.deleteBoard(action.boardId).pipe(
           map((response: unknown) => {
-            return requestBoardList()
+            return requestBoardList();
           }),
           catchError((error: unknown) => {
+            this.dialogService.open(ErrorModalComponent, {
+              context: {
+                title: 'An error has occured',
+                message: `${(error as HttpErrorResponse).status}: ${
+                  (error as HttpErrorResponse).message
+                }`,
+                closingActionFunction: () => this.boardListFacade.clearError(),
+              },
+            });
             return of(boardListError({ error: error as HttpErrorResponse }));
           })
         )
