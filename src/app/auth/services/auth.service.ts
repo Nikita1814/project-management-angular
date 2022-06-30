@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, switchMap } from 'rxjs';
 import { User } from 'src/app/redux/types';
 
 export interface UserSignUpResponse {
@@ -37,5 +36,8 @@ export class AuthService {
   }
   edit(user: User) {
     return this.http.put<UserEditResponse>(`${this.apiUrl}/users/${user.userId}`, user);
+  }
+  getUser(id: string){
+    return this.http.get<UserSignInResponse>(`${this.apiUrl}/users/${id}`)
   }
 }

@@ -32,11 +32,12 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.authService.signIn(action.user).pipe(
           map((response: UserSignInResponse) => {
-            console.log('recieved response', response)
+            console.log('recieved response', response);
             const parsedUser = jwtDecode(response.token) as User;
-            console.log('parsed user as', parsedUser)
+            console.log('parsed user as', parsedUser);
+            this.router.navigate(['auth']);
             return updateUser({
-              user: { ...parsedUser, token: response.token } as User,
+              user: { ...parsedUser, password: action.user.password, token: response.token } as User,
             });
           }),
           catchError((error: unknown) => {
@@ -114,7 +115,7 @@ export class AuthEffects {
     );
   });
 
-  
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,

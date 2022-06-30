@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
 import { User } from '../types';
@@ -10,7 +11,7 @@ import { selectUser } from './auth.selector';
 })
 export class AuthFacadeService {
   user$ = this.store.select(selectUser);
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   showUserId() {
     let userId: string = ''
@@ -39,5 +40,7 @@ export class AuthFacadeService {
   }
   logOut(){
     this.store.dispatch(logOut())
+    this.router.navigate(['auth'])
   }
+
 }

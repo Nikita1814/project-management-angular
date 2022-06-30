@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { User } from '../types';
 
 export const updateUser = createAction(
-  '[Authorization] SignIn  SUCCESS',
+  '[Authorization] SignIn SUCCESS',
   props<{ user: User }>()
 );
 
