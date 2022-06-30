@@ -4,7 +4,7 @@ import { authorizationError, clearAuthorizationError, logOut, updateUser } from 
 
 export const initialState: AuthState = {
   user: {
-    id:'',
+    userId:'',
     name:'',
     login:'',
     password:'',
@@ -18,7 +18,7 @@ on(updateUser, (state, { user }) => ({...state, user : user})),
 on(authorizationError, (state, {error}) => ({...state, authError: error})),
 on(clearAuthorizationError, (state) => ({...state, authError: null})),
 on(logOut, (state) => ({...state, user: {
-  id:'',
+  userId:'',
   name:'',
   login:'',
   password:'',

@@ -5,7 +5,7 @@ import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { BoardCardComponent } from './components/board-card/board-card.component';
 import { ColumnComponent } from './components/column/column.component';
 import { TaskComponent } from './components/task/task.component';
-import { NbButtonModule, NbCardModule, NbDialogModule, NbFormFieldModule, NbIconModule, NbInputModule, NbWindowModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbDialogModule, NbFormFieldModule, NbIconModule, NbInputModule, NbListModule, NbWindowModule } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
@@ -43,6 +43,7 @@ import { ColumnCreationFormComponent } from './components/column-creation-form/c
     ReactiveFormsModule,
     SharedModule,
     NbWindowModule.forChild(),
+    NbListModule,
   ]
 })
 export class BoardsModule { }

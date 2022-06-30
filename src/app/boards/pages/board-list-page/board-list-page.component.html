@@ -1,6 +1,6 @@
-<ng-container *ngIf="boardListFacadeService.boardList$ | async as boardList">
+<ng-container *ngIf="boardListFacade.boardList$ | async as boardList">
   <section class="board-card-list">
-    <div class="board-item" (click)="openCreationForm">
+    <div class="board-item" (click)="openCreationForm()">
       <h3>Create a board</h3>
     </div>
     <app-board-card *ngFor="let board of boardList let index=index; trackBy:boardById" [boardItem]="board">

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
 import { BoardFacadeService } from 'src/app/redux/board-reducer/board-facade.service';
 import { BoardCreationFormComponent } from '../../components/board-creation-form/board-creation-form.component';
+import { ColumnCreationFormComponent } from '../../components/column-creation-form/column-creation-form.component';
 import { ColumnResponse } from '../../services/board.service';
 
 @Component({
@@ -15,15 +16,15 @@ export class BoardPageComponent implements OnInit {
   constructor(private windowService: NbWindowService, private route: ActivatedRoute, public boardFacade: BoardFacadeService) { }
 
   ngOnInit(): void {
-    const boardId = this.route.snapshot.params['id'];
-    this.boardFacade.requestBoard(boardId)
+    this.boardId = this.route.snapshot.params['id'];
+    this.boardFacade.requestBoard(this.boardId)
   }
 
-  taskById(index: number, column: ColumnResponse) {
+  columnById(index: number, column: ColumnResponse) {
     return column.id;
   }
   openCreationForm() {
-    this.windowService.open(BoardCreationFormComponent, {
+    this.windowService.open(ColumnCreationFormComponent, {
       buttons: {
         minimize: true,
         maximize: true,

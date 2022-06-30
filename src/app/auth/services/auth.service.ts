@@ -31,13 +31,11 @@ export class AuthService {
 
   signUp(user: { name: string; login: string; password: string }) {
     return this.http.post<UserSignUpResponse>(`${this.apiUrl}signup`, user);
-    /*.pipe( switchMap((response: UserSignUpResponse) => this.http.post<UserSignInResponse>(
-  `${this.apiUrl}signin`, {login: response.login, password: response.password})*/
   }
   signIn(user: { login: string; password: string }) {
     return this.http.post<UserSignInResponse>(`${this.apiUrl}signin`, user);
   }
   edit(user: User) {
-    return this.http.put<UserEditResponse>(`${this.apiUrl}/users/${user.id}`, user);
+    return this.http.put<UserEditResponse>(`${this.apiUrl}/users/${user.userId}`, user);
   }
 }

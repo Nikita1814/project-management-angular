@@ -1,9 +1,9 @@
 
   <nb-card size="giant">
-    <nb-card-header>{{column.title}}</nb-card-header>
+    <nb-card-header>{{column.title + boardId}}</nb-card-header>
     <nb-card-body>
       <nb-list>
-    <nb-list-item *ngFor = "let task of column.tasks as task let index=index; trackBy:taskById">
+    <nb-list-item *ngFor = "let task of column.tasks let index=index; trackBy:taskById">
       <app-task [task]="task" [columnId]="column.id" [boardId]="boardId"></app-task>
     </nb-list-item>
     </nb-list>

@@ -52,4 +52,5 @@ export class ColumnComponent implements OnInit {
       },
     });
   }
+
 }

@@ -42,7 +42,7 @@ export class BoardListEffects {
     );
   });
 
-  deeteBoard$ = createEffect(() => {
+  deleteBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(initBoardDeletion),
       exhaustMap((action) =>

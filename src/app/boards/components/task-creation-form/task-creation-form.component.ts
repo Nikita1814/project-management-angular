@@ -3,6 +3,7 @@ import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { NbWindowRef } from '@nebular/theme';
 import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.service';
 import { BoardFacadeService } from 'src/app/redux/board-reducer/board-facade.service';
+import { User } from 'src/app/redux/types';
 import { Task } from '../../services/board.service';
 
 export interface CreationFormConfig {
@@ -18,15 +19,20 @@ export interface CreationFormConfig {
   styleUrls: ['./task-creation-form.component.scss'],
 })
 export class TaskCreationFormComponent implements OnInit {
-  context:  CreationFormConfig = this.windowRef.config.context! as CreationFormConfig
+  context: CreationFormConfig = this.windowRef.config
+    .context! as CreationFormConfig;
+  title: string =
+    this.context.type === 'create' ? '' : this.context.task!.title;
+  description: string =
+    this.context.type === 'create' ? '' : this.context.task!.description;
   taskForm = this.fb.group({
     title: [
-      this.context.type==='create' ? '' : {value:this.context.task!.title},
+      this.title,
       {
         validators: [Validators.required],
       },
     ],
-    description: [this.context.type==='create' ? '' : {value:this.context.task!.description}],
+    description: [this.description],
   });
   constructor(
     private fb: FormBuilder,
@@ -52,16 +58,17 @@ export class TaskCreationFormComponent implements OnInit {
       if (this.context.type === 'update') {
         this.boardFacade.initiateTaskUpdate(
           {
-            ...this.context.task!,
             title: this.taskForm.value.title,
+            order: this.context.task?.order as number,
             description: this.taskForm.value.description,
             userId: this.authFacade.showUserId(),
             boardId: this.context.boardId,
-            columnId: this.context.columnId
+            columnId: this.context.columnId,
           },
           this.context.task!.id
         );
       }
+
     }
   }
 
@@ -73,5 +80,6 @@ export class TaskCreationFormComponent implements OnInit {
       ? errorMsgs[`${Object.keys(errorObj)[0]}`]
       : '';
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

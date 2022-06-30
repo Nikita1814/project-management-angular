@@ -2,7 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http"
 import { BoardListItem, Board } from "../boards/services/board.service"
 
 export interface User {
-  id: string
+  userId: string
   name:string,
   login:string,
   password?:string,

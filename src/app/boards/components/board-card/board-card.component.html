@@ -6,6 +6,6 @@
       </nb-card-body>
       <nb-card-footer>
         <a [routerLink]="['board', boardItem.id]" nbButton status="primary"> Open</a>
-        <button (click)="openDeleteModal" nbButton status="primary"> Delete</button>
+        <button (click)="openDeleteModal()" nbButton status="primary"> Delete</button>
       </nb-card-footer>
     </nb-card>

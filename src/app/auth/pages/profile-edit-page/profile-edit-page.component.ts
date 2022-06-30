@@ -1,3 +1,5 @@
+//Work in Progrress
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.service';
@@ -12,22 +14,22 @@ export class ProfileEditPageComponent implements OnInit {
   user: User = {} as User;
   editForm = this.fb.group({
     name: [
-      { value: this.user.name },
+      this.user.name,
       {
         validators: [Validators.required],
       },
     ],
     login: [
-      { value: this.user.login },
+      this.user.login,
       {
         validators: [
           Validators.required,
           Validators.pattern(/[A-Za-z0-9!@#?]/),
-        ]
+        ],
       },
     ],
     password: [
-      { value: this.user.password },
+      this.user.password,
       {
         validators: [Validators.required],
       },
@@ -41,7 +43,7 @@ export class ProfileEditPageComponent implements OnInit {
       console.log('submitting the form');
 
       this.authFacade.initiateEdit({
-        id: this.user.id,
+        userId: this.user.userId,
         name: this.editForm.value.name,
         login: this.editForm.value.login,
         password: this.editForm.value.password,
@@ -62,6 +64,7 @@ export class ProfileEditPageComponent implements OnInit {
     this.authFacade.user$.subscribe((user: User) => {
       console.log('user is ', user);
       this.user = user;
+      console.log(this.user)
     });
   }
 }

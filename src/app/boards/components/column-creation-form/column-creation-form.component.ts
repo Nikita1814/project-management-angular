@@ -30,8 +30,8 @@ export class ColumnCreationFormComponent implements OnInit {
 
   handleSubmit() {
     if (this.columnForm.valid) {
-      console.log('form is valid uploading stuff');
-
+      console.log('context is ', this.context)
+      console.log('form is valid boardID and title', this.context.boardId), this.columnForm.value.title;
         this.boardFacade.initiateColumnCreation(
           {
             title: this.columnForm.value.title

@@ -29,7 +29,7 @@
   </div>
   <div class="form-buttons">
     <button nbButton status="primary" [disabled]="!taskForm.valid" type="submit" (click)="handleSubmit()">
-      {{context.type=== create ? Create : Update}}
+      {{(context.type === 'create') ? ('Create') : ('Update')}}
     </button>
   </div>
 </form>

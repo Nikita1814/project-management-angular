@@ -13,8 +13,8 @@ export class AuthFacadeService {
   constructor(private store: Store) {}
 
   showUserId() {
-    let userId : string = ''
-    this.user$.subscribe((user:User) => userId = user.id)
+    let userId: string = ''
+    this.user$.subscribe((user:User) => userId = user.userId)
     return userId
   }
   updateUser(user: User) {
