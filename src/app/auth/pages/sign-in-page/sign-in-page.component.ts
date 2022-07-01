@@ -33,11 +33,6 @@ export class SignInPageComponent {
 
   handleSignIn() {
     if (this.signInForm.valid) {
-      console.log('submitting the form with', {
-        login: this.signInForm.value.login,
-        password: this.signInForm.value.password,
-      });
-
       this._authFacade.initiateSignIn({
         login: this.signInForm.value.login,
         password: this.signInForm.value.password,

@@ -44,7 +44,6 @@ export class ProfileEditPageComponent implements OnInit {
 
   handleEdit() {
     if (this.editForm.valid) {
-      console.log('submitting the form');
 
       this._authFacade.initiateEdit({
         userId: this.user.userId,
@@ -66,9 +65,7 @@ export class ProfileEditPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._authFacade.user$.subscribe((user: User) => {
-      console.log('user is ', user);
       this.user = user;
-      console.log(this.user);
     });
   }
 }

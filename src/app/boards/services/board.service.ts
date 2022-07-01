@@ -75,7 +75,6 @@ export class BoardService {
   }
 
   deleteBoard(boardId: string) {
-    console.log('deleting board', boardId);
     return this._http.delete(`${this.apiUrl}boards/${boardId}`);
   }
 
@@ -103,7 +102,6 @@ export class BoardService {
     );
   }
   createTask(boardId: string, columnId: string, task: TaskCreationRequest) {
-    console.log('task that is being creatd', task);
     return this._http.post<TaskResponse>(
       `${this.apiUrl}boards/${boardId}/columns/${columnId}/tasks`,
       task,

@@ -32,9 +32,7 @@ export class AuthEffects {
       exhaustMap((action) =>
         this._authService.signIn(action.user).pipe(
           map((response: UserSignInResponse) => {
-            console.log('recieved response', response);
             const parsedUser = jwtDecode(response.token) as User;
-            console.log('parsed user as', parsedUser);
             this._router.navigate(['auth']);
             return updateUser({
               user: {
@@ -45,7 +43,6 @@ export class AuthEffects {
             });
           }),
           catchError((error: unknown) => {
-            console.log('caught a sign up error');
             this._dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
@@ -70,11 +67,9 @@ export class AuthEffects {
       exhaustMap((action) =>
         this._authService.signUp(action.user).pipe(
           map((_response: UserSignUpResponse) => {
-            console.log('sign up initiated');
             return finalizeSignUpAndEdit();
           }),
           catchError((error: unknown) => {
-            console.log('sign up error detected');
             this._dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',

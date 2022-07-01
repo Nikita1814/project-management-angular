@@ -39,7 +39,6 @@ export class SignUpPageComponent {
 
   handleSignUp() {
     if (this.signUpForm.valid) {
-      console.log('form is valid uploading stuff');
       this._authFacade.initiateSignUp({
         name: this.signUpForm.value.name,
         login: this.signUpForm.value.login,

@@ -51,7 +51,6 @@ export class BoardEffects {
       exhaustMap((action) =>
         this._boardService.createColumn(action.boardId, action.column).pipe(
           map((response: unknown) => {
-            console.log('a column was created', response);
             return requestBoard({ id: action.boardId });
           }),
           catchError((error: unknown) => {

@@ -43,7 +43,6 @@ export class TaskCreationFormComponent {
 
   handleSubmit() {
     if (this.taskForm.valid) {
-      console.log('form is valid uploading stuff');
       if (this.context.type === 'create') {
         this._boardFacade.initiateTaskCreation(
           this.context.boardId,
