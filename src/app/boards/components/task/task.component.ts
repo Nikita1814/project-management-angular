@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NbDialogService, NbWindowService } from '@nebular/theme';
 import { BoardFacadeService } from 'src/app/redux/board-reducer/board-facade.service';
 import { DialogueModalComponent } from 'src/app/shared/components/dialogue-modal/dialogue-modal.component';
@@ -9,39 +9,38 @@ import { TaskCreationFormComponent } from '../task-creation-form/task-creation-f
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   @Input() task!: Task;
   @Input() columnId!: string;
   @Input() boardId!: string;
   constructor(
-    private dialogService: NbDialogService,
-    private windowService: NbWindowService,
-    private boardFacade: BoardFacadeService
+    private _dialogService: NbDialogService,
+    private _windowService: NbWindowService,
+    private _boardFacade: BoardFacadeService,
   ) {}
 
-  ngOnInit(): void {}
-
   openDeletionModal() {
-    this.dialogService.open(DialogueModalComponent, {
+    this._dialogService.open(DialogueModalComponent, {
       context: {
         title: `Are you sure you want to delete the ${this.task.title} task?`,
-        message: ``,
+        message: '',
         DeclineActionFunction: () => {
           return;
         },
         AcceptActionFunction: () =>
-          this.boardFacade.initiateTaskDeletion(
+          this._boardFacade.initiateTaskDeletion(
             this.boardId,
             this.columnId,
-            this.task.id
+            this.task.id,
           ),
       },
     });
   }
 
   openUpdateForm() {
-    this.windowService.open(TaskCreationFormComponent, {
+    this._windowService.open(TaskCreationFormComponent, {
       buttons: {
         minimize: true,
         maximize: true,

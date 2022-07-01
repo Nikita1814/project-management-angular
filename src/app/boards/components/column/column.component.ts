@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NbDialogService, NbWindowService } from '@nebular/theme';
 import { BoardFacadeService } from 'src/app/redux/board-reducer/board-facade.service';
 import { DialogueModalComponent } from 'src/app/shared/components/dialogue-modal/dialogue-modal.component';
@@ -9,36 +9,39 @@ import { TaskCreationFormComponent } from '../task-creation-form/task-creation-f
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ColumnComponent implements OnInit {
+export class ColumnComponent {
   @Input() column!: ColumnResponse;
   @Input() boardId!: string;
   constructor(
-    private dialogService: NbDialogService,
-    private boardFacade: BoardFacadeService,
-    private windowService: NbWindowService
+    private _dialogService: NbDialogService,
+    private _boardFacade: BoardFacadeService,
+    private _windowService: NbWindowService,
   ) {}
   taskById(index: number, task: Task) {
     return task.id;
   }
-  ngOnInit(): void {}
 
   openDeletionModal() {
-    this.dialogService.open(DialogueModalComponent, {
+    this._dialogService.open(DialogueModalComponent, {
       context: {
         title: `Are you sure you want to delete the ${this.column.title} column?`,
-        message: ``,
+        message: '',
         DeclineActionFunction: () => {
           return;
         },
         AcceptActionFunction: () =>
-          this.boardFacade.initiateColumnDeletion(this.boardId, this.column.id),
+          this._boardFacade.initiateColumnDeletion(
+            this.boardId,
+            this.column.id,
+          ),
       },
     });
   }
 
   openCreationForm() {
-    this.windowService.open(TaskCreationFormComponent, {
+    this._windowService.open(TaskCreationFormComponent, {
       buttons: {
         minimize: true,
         maximize: true,
@@ -52,5 +55,4 @@ export class ColumnComponent implements OnInit {
       },
     });
   }
-
 }

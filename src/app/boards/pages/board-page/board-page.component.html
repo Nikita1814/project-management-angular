@@ -1,11 +1,8 @@
-
 <div class="column-list">
-  <ng-container *ngIf="boardFacade.board$ | async as board">
+  <ng-container *ngIf="_boardFacade.board$ | async as board">
     <div>{{board.id}}</div>
-    <app-column *ngFor = "let column of board.columns let index=index; trackBy:columnById" [column]="column" [boardId]="board.id"></app-column>
+    <app-column *ngFor="let column of board.columns let index=index; trackBy:columnById" [column]="column"
+      [boardId]="board.id"></app-column>
   </ng-container>
 </div>
-<button (click)="openCreationForm()" nbButton status="primary" size="giant">  Crerate a Column</button>
-
-
-
+<button (click)="openCreationForm()" nbButton status="primary" size="giant"> Crerate a Column</button>

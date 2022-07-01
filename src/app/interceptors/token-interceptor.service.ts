@@ -5,8 +5,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { BoardService } from '../boards/services/board.service';
+import { Observable } from 'rxjs';
 import { AuthFacadeService } from '../redux/auth-reducer/auth-facade.service';
 import { User } from '../redux/types';
 
@@ -15,18 +14,14 @@ import { User } from '../redux/types';
 })
 export class TokenInterceptorService implements HttpInterceptor {
   token: string | undefined;
-  constructor(
-    private boardService: BoardService,
-    private authFacade: AuthFacadeService
-  ) {
-    this.authFacade.user$.subscribe((user: User) => (this.token = user.token));
+  constructor(private _authFacade: AuthFacadeService) {
+    this._authFacade.user$.subscribe((user: User) => (this.token = user.token));
   }
   intercept(
     request: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     if (request.url.includes('/signin') || request.url.includes('/signUp')) {
-      // Do nothing
       return next.handle(request);
     } else {
       if (this.token) {

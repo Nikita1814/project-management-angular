@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
+import { map, exhaustMap, catchError } from 'rxjs/operators';
 import {
   BoardListItem,
   BoardService,
@@ -17,86 +17,87 @@ import {
   requestBoardList,
   updateBoardList,
 } from './board-list.actions';
+
 @Injectable()
 export class BoardListEffects {
   getBoardList$ = createEffect(() => {
-    return this.actions$.pipe(
+    return this._actions$.pipe(
       ofType(requestBoardList),
-      exhaustMap((action) =>
-        this.boardService.getBoards().pipe(
+      exhaustMap((_action) =>
+        this._boardService.getBoards().pipe(
           map((response: BoardListItem[]) => {
             return updateBoardList({ boardList: response });
           }),
           catchError((error: unknown) => {
-            this.dialogService.open(ErrorModalComponent, {
+            this._dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
                 message: `${(error as HttpErrorResponse).status}: ${
                   (error as HttpErrorResponse).message
                 }`,
-                closingActionFunction: () => this.boardListFacade.clearError(),
+                closingActionFunction: () => this._boardListFacade.clearError(),
               },
             });
             return of(boardListError({ error: error as HttpErrorResponse }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   });
 
   createBoard$ = createEffect(() => {
-    return this.actions$.pipe(
+    return this._actions$.pipe(
       ofType(initBoardCreation),
       exhaustMap((action) =>
-        this.boardService.createBoard(action.board).pipe(
-          map((response: BoardListItem) => {
+        this._boardService.createBoard(action.board).pipe(
+          map((_response: BoardListItem) => {
             return requestBoardList();
           }),
           catchError((error: unknown) => {
-            this.dialogService.open(ErrorModalComponent, {
+            this._dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
                 message: `${(error as HttpErrorResponse).status}: ${
                   (error as HttpErrorResponse).message
                 }`,
-                closingActionFunction: () => this.boardListFacade.clearError(),
+                closingActionFunction: () => this._boardListFacade.clearError(),
               },
             });
             return of(boardListError({ error: error as HttpErrorResponse }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   });
 
   deleteBoard$ = createEffect(() => {
-    return this.actions$.pipe(
+    return this._actions$.pipe(
       ofType(initBoardDeletion),
       exhaustMap((action) =>
-        this.boardService.deleteBoard(action.boardId).pipe(
-          map((response: unknown) => {
+        this._boardService.deleteBoard(action.boardId).pipe(
+          map((_response: unknown) => {
             return requestBoardList();
           }),
           catchError((error: unknown) => {
-            this.dialogService.open(ErrorModalComponent, {
+            this._dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
                 message: `${(error as HttpErrorResponse).status}: ${
                   (error as HttpErrorResponse).message
                 }`,
-                closingActionFunction: () => this.boardListFacade.clearError(),
+                closingActionFunction: () => this._boardListFacade.clearError(),
               },
             });
             return of(boardListError({ error: error as HttpErrorResponse }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   });
   constructor(
-    private actions$: Actions,
-    private boardService: BoardService,
-    private boardListFacade: BoardListFacadeService,
-    private dialogService: NbDialogService
+    private _actions$: Actions,
+    private _boardService: BoardService,
+    private _boardListFacade: BoardListFacadeService,
+    private _dialogService: NbDialogService,
   ) {}
 }

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { BoardListFacadeService } from 'src/app/redux/board-list-reducer/board-list-facade.service';
 
 @Component({
   selector: 'app-board-creation-form',
   templateUrl: './board-creation-form.component.html',
-  styleUrls: ['./board-creation-form.component.scss']
+  styleUrls: ['./board-creation-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardCreationFormComponent implements OnInit {
-
-  boardForm = this.fb.group({
+export class BoardCreationFormComponent {
+  boardForm = this._fb.group({
     title: [
       '',
       {
@@ -18,12 +18,14 @@ export class BoardCreationFormComponent implements OnInit {
     ],
     description: [''],
   });
-  constructor(private fb: FormBuilder, private boardListFacade: BoardListFacadeService) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _boardListFacade: BoardListFacadeService,
+  ) {}
 
   handleSubmit() {
     if (this.boardForm.valid) {
-      console.log('form is valid uploading stuff');
-      this.boardListFacade.initiateBoardCreation({
+      this._boardListFacade.initiateBoardCreation({
         title: this.boardForm.value.title,
         description: this.boardForm.value.description,
       });
@@ -32,14 +34,10 @@ export class BoardCreationFormComponent implements OnInit {
 
   getErrorMsg(
     errorObj: ValidationErrors | null,
-    errorMsgs: { [kind: string]: string }
+    errorMsgs: { [kind: string]: string },
   ) {
-    return errorObj && errorMsgs
-      ? errorMsgs[`${Object.keys(errorObj)[0]}`]
-      : '';
+    return errorObj && errorMsgs ?
+      errorMsgs[`${Object.keys(errorObj)[0]}`] :
+      '';
   }
-
-  ngOnInit(): void {
-  }
-
 }

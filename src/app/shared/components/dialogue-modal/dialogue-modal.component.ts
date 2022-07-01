@@ -1,26 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({
   selector: 'app-dialogue-modal',
   templateUrl: './dialogue-modal.component.html',
-  styleUrls: ['./dialogue-modal.component.scss']
+  styleUrls: ['./dialogue-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogueModalComponent implements OnInit {
+export class DialogueModalComponent {
   @Input() title!: string;
   @Input() message!: string;
-  @Input() AcceptActionFunction!: () => void
-  @Input() DeclineActionFunction!: () => void
-  constructor( protected ref: NbDialogRef<DialogueModalComponent>) { }
+  @Input() AcceptActionFunction!: () => void;
+  @Input() DeclineActionFunction!: () => void;
+  constructor(protected _ref: NbDialogRef<DialogueModalComponent>) {}
 
   dismiss() {
-    this.ref.close();
+    this._ref.close();
   }
-  accept(){
-    this.ref.close()
-    this.AcceptActionFunction()
+  accept() {
+    this._ref.close();
+    this.AcceptActionFunction();
   }
-  ngOnInit(): void {
-  }
-
 }

@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.service';
-import { User } from 'src/app/redux/types';
 
 @Component({
   selector: 'app-account-management-page',
   templateUrl: './account-management-page.component.html',
-  styleUrls: ['./account-management-page.component.scss']
+  styleUrls: ['./account-management-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AccountManagementPageComponent implements OnInit {
-  constructor(public authFacade: AuthFacadeService ) { }
-
-  ngOnInit(): void {
-  }
-
+export class AccountManagementPageComponent {
+  constructor(public _authFacade: AuthFacadeService) {}
 }

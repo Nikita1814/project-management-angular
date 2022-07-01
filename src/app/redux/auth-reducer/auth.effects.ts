@@ -21,21 +21,21 @@ import {
   initiateEdit,
   initiateSignIn,
   initiateSignUp,
-  logOut,
   updateUser,
 } from './auth.actions';
+
 @Injectable()
 export class AuthEffects {
   signIn$ = createEffect(() => {
-    return this.actions$.pipe(
+    return this._actions$.pipe(
       ofType(initiateSignIn),
       exhaustMap((action) =>
-        this.authService.signIn(action.user).pipe(
+        this._authService.signIn(action.user).pipe(
           map((response: UserSignInResponse) => {
             console.log('recieved response', response);
             const parsedUser = jwtDecode(response.token) as User;
             console.log('parsed user as', parsedUser);
-            this.router.navigate(['auth']);
+            this._router.navigate(['auth']);
             return updateUser({
               user: {
                 ...parsedUser,
@@ -46,92 +46,92 @@ export class AuthEffects {
           }),
           catchError((error: unknown) => {
             console.log('caught a sign up error');
-            this.dialogService.open(ErrorModalComponent, {
+            this._dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
                 message: `${(error as HttpErrorResponse).status}: ${
                   (error as HttpErrorResponse).message
                 }`,
-                closingActionFunction: this.authFacade.clearError,
+                closingActionFunction: this._authFacade.clearError,
               },
             });
             return of(
-              authorizationError({ error: error as HttpErrorResponse })
+              authorizationError({ error: error as HttpErrorResponse }),
             );
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   });
 
   signUp$ = createEffect(() => {
-    return this.actions$.pipe(
+    return this._actions$.pipe(
       ofType(initiateSignUp),
       exhaustMap((action) =>
-        this.authService.signUp(action.user).pipe(
-          map((response: UserSignUpResponse) => {
+        this._authService.signUp(action.user).pipe(
+          map((_response: UserSignUpResponse) => {
             console.log('sign up initiated');
             return finalizeSignUpAndEdit();
           }),
           catchError((error: unknown) => {
             console.log('sign up error detected');
-            this.dialogService.open(ErrorModalComponent, {
+            this._dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
                 message: `${(error as HttpErrorResponse).status}: ${
                   (error as HttpErrorResponse).message
                 }`,
-                closingActionFunction: this.authFacade.clearError,
+                closingActionFunction: this._authFacade.clearError,
               },
             });
             return of(
-              authorizationError({ error: error as HttpErrorResponse })
+              authorizationError({ error: error as HttpErrorResponse }),
             );
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   });
 
   edit$ = createEffect(() => {
-    return this.actions$.pipe(
+    return this._actions$.pipe(
       ofType(initiateEdit),
       exhaustMap((action) =>
-        this.authService.edit(action.user).pipe(
-          map((response: UserEditResponse) => {
+        this._authService.edit(action.user).pipe(
+          map((_response: UserEditResponse) => {
             return updateUser({ user: action.user as User });
           }),
           catchError((error: unknown) => {
-            this.dialogService.open(ErrorModalComponent, {
+            this._dialogService.open(ErrorModalComponent, {
               context: {
                 title: 'An error has occured',
                 message: `${(error as HttpErrorResponse).status}: ${
                   (error as HttpErrorResponse).message
                 }`,
-                closingActionFunction: this.authFacade.clearError,
+                closingActionFunction: this._authFacade.clearError,
               },
             });
             return of(
-              authorizationError({ error: error as HttpErrorResponse })
+              authorizationError({ error: error as HttpErrorResponse }),
             );
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   });
 
   signUpAndEditSucess$ = createEffect(() => {
-    return this.actions$.pipe(
+    return this._actions$.pipe(
       ofType(finalizeSignUpAndEdit),
-      tap(() => this.router.navigate(['/auth/logIn']))
+      tap(() => this._router.navigate(['/auth/logIn'])),
     );
   });
 
   constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private authFacade: AuthFacadeService,
-    private router: Router,
-    private dialogService: NbDialogService
+    private _actions$: Actions,
+    private _authService: AuthService,
+    private _authFacade: AuthFacadeService,
+    private _router: Router,
+    private _dialogService: NbDialogService,
   ) {}
 }

@@ -6,21 +6,26 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbToggleModule, NbUserModule, NbDialogModule, NbWindowModule } from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbButtonModule,
+  NbToggleModule,
+  NbUserModule,
+  NbDialogModule,
+  NbWindowModule,
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { HeaderComponent } from './core/components/header/header.component';
 import { CoreModule } from './core/core.module';
 import { store } from './redux/store';
 import { AuthEffects } from './redux/auth-reducer/auth.effects';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
 import { BoardListEffects } from './redux/board-list-reducer/board-list.effects';
 import { BoardEffects } from './redux/board-reducer/board.effects';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,8 +48,8 @@ import { BoardEffects } from './redux/board-reducer/board.effects';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

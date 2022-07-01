@@ -51,12 +51,6 @@
           "error",
           "last"
         ],
-        "max-len": [
-          "error",
-          {
-            "code": 120
-          }
-        ],
         "keyword-spacing": [
           "error",
           {
@@ -132,7 +126,6 @@
             "ignoreRestSiblings": true
           }
         ],
-        "no-empty-function": "error",
         "no-duplicate-imports": "error",
         "func-call-spacing": "error",
         "comma-dangle": [
@@ -186,7 +179,6 @@
           }
         ],
         "rxjs/no-topromise": "error",
-        "rxjs/no-cyclic-action": "error",
         "rxjs/no-unsafe-catch": "error",
         "rxjs/no-unsafe-first": "error",
         "rxjs/no-unsafe-switchmap": "error"

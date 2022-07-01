@@ -5,24 +5,18 @@ import { ErrorModalComponent } from './components/error-modal/error-modal.compon
 import { NbButtonModule, NbCardModule, NbDialogModule } from '@nebular/theme';
 import { DialogueModalComponent } from './components/dialogue-modal/dialogue-modal.component';
 
-
-
 @NgModule({
   declarations: [
     ErrorLoggerComponent,
     ErrorModalComponent,
-    DialogueModalComponent
+    DialogueModalComponent,
   ],
   imports: [
     CommonModule,
     NbDialogModule.forChild(),
     NbButtonModule,
-    NbCardModule
+    NbCardModule,
   ],
-  exports:[
-    ErrorLoggerComponent,
-    ErrorModalComponent,
-    DialogueModalComponent
-  ]
+  exports: [ErrorLoggerComponent, ErrorModalComponent, DialogueModalComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -4,10 +4,12 @@ import { User } from '../types';
 
 export const updateUser = createAction(
   '[Authorization] SignIn SUCCESS',
-  props<{ user: User }>()
+  props<{ user: User }>(),
 );
 
-export const finalizeSignUpAndEdit = createAction('[Authoeization] SignUp / Edit SUCCESS');
+export const finalizeSignUpAndEdit = createAction(
+  '[Authoeization] SignUp / Edit SUCCESS',
+);
 
 export const initiateSignIn = createAction(
   '[SigngIn Page] Initiate SignIn',
@@ -16,16 +18,16 @@ export const initiateSignIn = createAction(
       login: string;
       password: string;
     };
-  }>()
+  }>(),
 );
 
 export const authorizationError = createAction(
   '[Authorization] Authorization Error',
-  props<{ error: HttpErrorResponse }>()
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const clearAuthorizationError = createAction(
-  '[Authorization] AuthorizationError Error'
+  '[Authorization] AuthorizationError Error',
 );
 
 export const initiateSignUp = createAction(
@@ -36,12 +38,12 @@ export const initiateSignUp = createAction(
       password: string;
       name: string;
     };
-  }>()
+  }>(),
 );
 
 export const initiateEdit = createAction(
   '[Edit Page] Initiate Edit',
-  props<{ user: User }>()
+  props<{ user: User }>(),
 );
 
 export const logOut = createAction('[ Authorization ] Logout');

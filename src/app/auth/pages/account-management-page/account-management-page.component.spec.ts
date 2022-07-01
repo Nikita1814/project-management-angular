@@ -8,9 +8,8 @@ describe('AccountManagementPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountManagementPageComponent ]
-    })
-    .compileComponents();
+      declarations: [AccountManagementPageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

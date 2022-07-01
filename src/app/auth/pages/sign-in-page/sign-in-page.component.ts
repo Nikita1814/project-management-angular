@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.service';
 
@@ -6,9 +6,10 @@ import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.servic
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
   styleUrls: ['./sign-in-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInPageComponent implements OnInit {
-  signInForm = this.fb.group({
+export class SignInPageComponent {
+  signInForm = this._fb.group({
     login: [
       '',
       {
@@ -25,9 +26,10 @@ export class SignInPageComponent implements OnInit {
       },
     ],
   });
-  constructor(private fb: FormBuilder, private authFacade: AuthFacadeService) {}
-
-  ngOnInit(): void {}
+  constructor(
+    private _fb: FormBuilder,
+    private _authFacade: AuthFacadeService,
+  ) {}
 
   handleSignIn() {
     if (this.signInForm.valid) {
@@ -36,7 +38,7 @@ export class SignInPageComponent implements OnInit {
         password: this.signInForm.value.password,
       });
 
-      this.authFacade.initiateSignIn({
+      this._authFacade.initiateSignIn({
         login: this.signInForm.value.login,
         password: this.signInForm.value.password,
       });
@@ -45,10 +47,10 @@ export class SignInPageComponent implements OnInit {
 
   getErrorMsg(
     errorObj: ValidationErrors | null,
-    errorMsgs: { [kind: string]: string }
+    errorMsgs: { [kind: string]: string },
   ) {
-    return errorObj && errorMsgs
-      ? errorMsgs[`${Object.keys(errorObj)[0]}`]
-      : '';
+    return errorObj && errorMsgs ?
+      errorMsgs[`${Object.keys(errorObj)[0]}`] :
+      '';
   }
 }

@@ -1,41 +1,41 @@
 <form (ngSubmit)="handleEdit()" [formGroup]="editForm" class="log-in-form">
-  <ng-container *ngIf="this.authFacade.user$ | async as user" >
+  <ng-container *ngIf="this._authFacade.user$ | async as user">
 
-  <div class="input-grp">
-    <label class="block-label" htmlFor="login"> Login </label>
-    <nb-form-field>
-      <input nbInput id="login" placeholder="Login" type="email" formControlName="login">
-      <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
-    </nb-form-field>
-    <ng-container *ngIf="
+    <div class="input-grp">
+      <label class="block-label" htmlFor="login"> Login </label>
+      <nb-form-field>
+        <input nbInput id="login" placeholder="Login" type="email" formControlName="login">
+        <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
+      </nb-form-field>
+      <ng-container *ngIf="
           editForm.get('login')!.touched &&
           editForm.get('login')!.invalid
         ">
-      <app-error-logger *ngIf="editForm.get('login')!.errors" [error]="getErrorMsg( editForm.get('login')!.errors, {
+        <app-error-logger *ngIf="editForm.get('login')!.errors" [error]="getErrorMsg( editForm.get('login')!.errors, {
             required: 'Please enter an email',
             email: 'Email is invalid'
           })"></app-error-logger>
-    </ng-container>
-  </div>
-  <div class="input-grp">
-    <label class="block-label" htmlFor="password"> Password </label>
-    <nb-form-field>
-      <nb-icon nbPrefix icon="unlock-outline" pack="eva"></nb-icon>
-      <input nbInput fullWidth id="password" placeholder="Pasword" type="password"  formControlName="password" />
-    </nb-form-field>
-    <ng-container *ngIf="
+      </ng-container>
+    </div>
+    <div class="input-grp">
+      <label class="block-label" htmlFor="password"> Password </label>
+      <nb-form-field>
+        <nb-icon nbPrefix icon="unlock-outline" pack="eva"></nb-icon>
+        <input nbInput fullWidth id="password" placeholder="Pasword" type="password" formControlName="password" />
+      </nb-form-field>
+      <ng-container *ngIf="
             editForm.get('password')!.touched &&
             editForm.get('password')!.invalid
           ">
-      <app-error-logger *ngIf="editForm.get('password')!.errors" [error]="getErrorMsg( editForm.get('password')!.errors, {
+        <app-error-logger *ngIf="editForm.get('password')!.errors" [error]="getErrorMsg( editForm.get('password')!.errors, {
               required: 'Please enter a password',
               pattern:
                 'Your password is not strong enough,the passsword must contain at least 8 characters including: uppercase, lowercase, letters, numbers, special characters (! @ # ? )'
             })"></app-error-logger>
-    </ng-container>
-  </div>
-</ng-container>
-    <button nbButton status="primary" [disabled]="!editForm.valid" type="submit" (click)="handleEdit()">
-      Edit
-    </button>
+      </ng-container>
+    </div>
+  </ng-container>
+  <button nbButton status="primary" [disabled]="!editForm.valid" type="submit" (click)="handleEdit()">
+    Edit
+  </button>
 </form>

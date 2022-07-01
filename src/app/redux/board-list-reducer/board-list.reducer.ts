@@ -1,18 +1,31 @@
-import { createReducer, on, State } from '@ngrx/store';
-import { AuthState, BoardListState, User } from '../types';
-import { boardListError, clearBoardListError, updateBoardList } from './board-list.actions';
-
+import { createReducer, on } from '@ngrx/store';
+import { BoardListState } from '../types';
+import {
+  boardListError,
+  clearBoardListError,
+  updateBoardList,
+} from './board-list.actions';
 
 export const initialState: BoardListState = {
   boardList: [],
-  boardListError: null
-}
-
+  boardListError: null,
+};
 
 export const boardListReducer = createReducer(
-initialState,
-on(updateBoardList, (state, { boardList }) => ({...state, boardList : boardList})),
-on(boardListError, (state, {error}) => ({...state, boardListError: error})),
-on(clearBoardListError, (state) => ({...state, boardListError: null})),
-)
-
+  initialState,
+  on(
+    updateBoardList,
+    (state, { boardList }): BoardListState => ({
+      ...state,
+      boardList: boardList,
+    }),
+  ),
+  on(
+    boardListError,
+    (state, { error }): BoardListState => ({ ...state, boardListError: error }),
+  ),
+  on(
+    clearBoardListError,
+    (state): BoardListState => ({ ...state, boardListError: null }),
+  ),
+);

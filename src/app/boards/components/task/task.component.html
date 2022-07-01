@@ -1,11 +1,10 @@
-
-    <nb-card size="small">
-      <nb-card-header>{{task.title}}</nb-card-header>
-      <nb-card-body>
-        {{task.description}}
-      </nb-card-body>
-      <nb-card-footer>
-      <button (click) ="openUpdateForm()" nbButton status="primary"> Edit</button>
-      <button (click) ="openDeletionModal()" nbButton status="danger">Delete</button>
-      </nb-card-footer>
-    </nb-card>
+<nb-card size="small">
+  <nb-card-header>{{task.title}}</nb-card-header>
+  <nb-card-body>
+    {{task.description}}
+  </nb-card-body>
+  <nb-card-footer>
+    <button (click)="openUpdateForm()" nbButton status="primary"> Edit</button>
+    <button (click)="openDeletionModal()" nbButton status="danger">Delete</button>
+  </nb-card-footer>
+</nb-card>

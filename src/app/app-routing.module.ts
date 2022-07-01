@@ -4,15 +4,16 @@ import { WelcomePageComponent } from './core/pages/welcome-page/welcome-page.com
 import { AuthReqGuard } from './guards/auth-req.guard';
 
 const routes: Routes = [
-  { path: '', component: WelcomePageComponent},
+  { path: '', component: WelcomePageComponent },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'boards',
-    loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
-    canActivate:[AuthReqGuard]
+    loadChildren: () =>
+      import('./boards/boards.module').then((m) => m.BoardsModule),
+    canActivate: [AuthReqGuard],
   },
 ];
 
@@ -20,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

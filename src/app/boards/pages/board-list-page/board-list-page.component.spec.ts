@@ -8,9 +8,9 @@ describe('BoardListPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BoardListPageComponent ]
+      declarations: [BoardListPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

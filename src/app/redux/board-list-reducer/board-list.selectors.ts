@@ -1,14 +1,15 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AuthState, BoardListState, User } from '../types';
+import { BoardListState } from '../types';
 
-const selectBoardListFeature = createFeatureSelector<BoardListState>('boardList');
+const selectBoardListFeature =
+  createFeatureSelector<BoardListState>('boardList');
 
 export const selectBoardList = createSelector(
   selectBoardListFeature,
-  ( state: BoardListState ) => state.boardList
+  (state: BoardListState) => state.boardList,
 );
 
-export const selectBoardListError  = createSelector(
+export const selectBoardListError = createSelector(
   selectBoardListFeature,
-  ( state: BoardListState ) => state.boardListError
-)
+  (state: BoardListState) => state.boardListError,
+);

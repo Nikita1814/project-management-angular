@@ -7,10 +7,10 @@ import { AuthReqGuard } from '../guards/auth-req.guard';
 import { AccountManagementPageComponent } from './pages/account-management-page/account-management-page.component';
 
 const routes: Routes = [
-  { path:'', component: AccountManagementPageComponent},
+  { path: '', component: AccountManagementPageComponent },
   { path: 'signIn', component: SignInPageComponent },
   { path: 'signUp', component: SignUpPageComponent },
-  {path: 'edit', component: ProfileEditPageComponent, canActivate:[AuthReqGuard]}
+  { path: 'edit', component: ProfileEditPageComponent, canActivate: [AuthReqGuard] },
 ];
 
 @NgModule({

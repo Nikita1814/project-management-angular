@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Task {
@@ -65,68 +65,61 @@ export interface TaskUpdateRequest {
 export class BoardService {
   apiUrl = 'https://gentle-earth-67890.herokuapp.com/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
   getBoards() {
-    return this.http.get<BoardListItem[]>(`${this.apiUrl}boards`);
+    return this._http.get<BoardListItem[]>(`${this.apiUrl}boards`);
   }
 
   createBoard(board: BoardCreationRequest) {
-    return this.http.post<BoardListItem>(`${this.apiUrl}boards`, board);
+    return this._http.post<BoardListItem>(`${this.apiUrl}boards`, board);
   }
 
   deleteBoard(boardId: string) {
-    console.log('deleting board', boardId)
-    return this.http.delete(`${this.apiUrl}boards/${boardId}`);
+    console.log('deleting board', boardId);
+    return this._http.delete(`${this.apiUrl}boards/${boardId}`);
   }
 
   getBoard(id: string) {
-    return this.http.get<Board>(`${this.apiUrl}boards/${id}`);
+    return this._http.get<Board>(`${this.apiUrl}boards/${id}`);
   }
 
   createColumn(boardId: string, column: ColumnCreationRequest) {
-    return this.http.post<ColumnResponse>(
+    return this._http.post<ColumnResponse>(
       `${this.apiUrl}boards/${boardId}/columns`,
-      column
+      column,
     );
   }
 
   deleteColumn(boardId: string, columnId: string) {
-    return this.http.delete(
-      `${this.apiUrl}boards/${boardId}/columns/${columnId}`
+    return this._http.delete(
+      `${this.apiUrl}boards/${boardId}/columns/${columnId}`,
     );
   }
 
-  updateColumn(
-    boardId: string,
-    columnId: string,
-    column: ColumnUpdateRequest
-  ) {
-    return this.http.post(
+  updateColumn(boardId: string, columnId: string, column: ColumnUpdateRequest) {
+    return this._http.post(
       `${this.apiUrl}boards/${boardId}/columns/${columnId}`,
-      column
+      column,
     );
   }
   createTask(boardId: string, columnId: string, task: TaskCreationRequest) {
-    console.log('task that is being creatd',task)
-    return this.http.post<TaskResponse>(
+    console.log('task that is being creatd', task);
+    return this._http.post<TaskResponse>(
       `${this.apiUrl}boards/${boardId}/columns/${columnId}/tasks`,
-      task
+      task,
     );
   }
 
   deleteTask(boardId: string, columnId: string, taskId: string) {
-    return this.http.delete(
-      `${this.apiUrl}boards/${boardId}/columns/${columnId}/tasks/${taskId}`
+    return this._http.delete(
+      `${this.apiUrl}boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
     );
   }
 
-  updateTask(
-    task: TaskUpdateRequest,
-    taskId: string
-  ) {
-    return this.http.put(
+  updateTask(task: TaskUpdateRequest, taskId: string) {
+    return this._http.put(
       `${this.apiUrl}boards/${task.boardId}/columns/${task.columnId}/tasks/${taskId}`,
-      task
+      task,
     );
   }
 }

@@ -4,7 +4,7 @@
     RU
   </div>
   <a [routerLink]="['/auth']" nbButton status="primary" size="small">Manage Profile</a>
-  <ng-container *ngIf="this.authFacade.user$ | async as user">
+  <ng-container *ngIf="this._authFacade.user$ | async as user">
     <ng-container *ngIf="user.userId.length > 0">
       <a [routerLink]="['/boards']" class="header-go-main" nbButton status="primary" size="small"> Go to main page</a>
       <nb-user name="{{user.name}}" title="{{user.login}}"></nb-user>

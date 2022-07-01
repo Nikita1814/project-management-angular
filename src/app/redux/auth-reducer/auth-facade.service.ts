@@ -1,46 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { pipe } from 'rxjs';
 import { User } from '../types';
-import { clearAuthorizationError, initiateEdit, initiateSignIn, initiateSignUp, logOut, updateUser } from './auth.actions';
+import {
+  clearAuthorizationError,
+  initiateEdit,
+  initiateSignIn,
+  initiateSignUp,
+  logOut,
+  updateUser,
+} from './auth.actions';
 import { selectUser } from './auth.selector';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthFacadeService {
-  user$ = this.store.select(selectUser);
-  constructor(private store: Store, private router: Router) {}
+  user$ = this._store.select(selectUser);
+  constructor(private _store: Store, private _router: Router) {}
 
   showUserId() {
-    let userId: string = ''
-    this.user$.subscribe((user:User) => userId = user.userId)
-    return userId
+    let userId: string = '';
+    this.user$.subscribe((user: User) => (userId = user.userId));
+    return userId;
   }
   updateUser(user: User) {
-    this.store.dispatch(updateUser({ user: user }));
+    this._store.dispatch(updateUser({ user: user }));
   }
 
   initiateSignIn(user: { login: string; password: string }) {
-    console.log('dispatching signIn ')
-    this.store.dispatch(initiateSignIn({ user: user }));
+    console.log('dispatching signIn ');
+    this._store.dispatch(initiateSignIn({ user: user }));
   }
 
   initiateSignUp(user: { login: string; password: string; name: string }) {
-    console.log('dspatching sign up')
-    this.store.dispatch(initiateSignUp({ user: user }));
+    console.log('dspatching sign up');
+    this._store.dispatch(initiateSignUp({ user: user }));
   }
 
-  initiateEdit(user:User) {
-    this.store.dispatch(initiateEdit({user: {...user}}))
+  initiateEdit(user: User) {
+    this._store.dispatch(initiateEdit({ user: { ...user } }));
   }
-  clearError(){
-    this.store.dispatch(clearAuthorizationError())
+  clearError() {
+    this._store.dispatch(clearAuthorizationError());
   }
-  logOut(){
-    this.store.dispatch(logOut())
-    this.router.navigate(['auth'])
+  logOut() {
+    this._store.dispatch(logOut());
+    this._router.navigate(['auth']);
   }
-
 }

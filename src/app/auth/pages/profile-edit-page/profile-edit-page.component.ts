@@ -1,6 +1,6 @@
 //Work in Progrress
 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { AuthFacadeService } from 'src/app/redux/auth-reducer/auth-facade.service';
 import { User } from 'src/app/redux/types';
@@ -9,10 +9,11 @@ import { User } from 'src/app/redux/types';
   selector: 'app-profile-edit-page',
   templateUrl: './profile-edit-page.component.html',
   styleUrls: ['./profile-edit-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileEditPageComponent implements OnInit {
   user: User = {} as User;
-  editForm = this.fb.group({
+  editForm = this._fb.group({
     name: [
       this.user.name,
       {
@@ -36,13 +37,16 @@ export class ProfileEditPageComponent implements OnInit {
     ],
   });
 
-  constructor(private fb: FormBuilder, public authFacade: AuthFacadeService) {}
+  constructor(
+    private _fb: FormBuilder,
+    public _authFacade: AuthFacadeService,
+  ) {}
 
   handleEdit() {
     if (this.editForm.valid) {
       console.log('submitting the form');
 
-      this.authFacade.initiateEdit({
+      this._authFacade.initiateEdit({
         userId: this.user.userId,
         name: this.editForm.value.name,
         login: this.editForm.value.login,
@@ -53,18 +57,18 @@ export class ProfileEditPageComponent implements OnInit {
 
   getErrorMsg(
     errorObj: ValidationErrors | null,
-    errorMsgs: { [kind: string]: string }
+    errorMsgs: { [kind: string]: string },
   ) {
-    return errorObj && errorMsgs
-      ? errorMsgs[`${Object.keys(errorObj)[0]}`]
-      : '';
+    return errorObj && errorMsgs ?
+      errorMsgs[`${Object.keys(errorObj)[0]}`] :
+      '';
   }
 
   ngOnInit(): void {
-    this.authFacade.user$.subscribe((user: User) => {
+    this._authFacade.user$.subscribe((user: User) => {
       console.log('user is ', user);
       this.user = user;
-      console.log(this.user)
+      console.log(this.user);
     });
   }
 }
